@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer
+from .models import Customer, Product
 
 # Register your models here.
 
@@ -9,7 +9,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = ['age']
     ordering = ['id']
     
-    readonly_fields = ['age']
+    # readonly_fields = ['age']
     fieldsets = (
         ('Name', {
             'fields': ('first_name', 'last_name')
@@ -23,3 +23,8 @@ class CustomerAdmin(admin.ModelAdmin):
     )
 
 admin.site.register(Customer, CustomerAdmin)
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'product_name', 'price']
+
+admin.site.register(Product, ProductAdmin)

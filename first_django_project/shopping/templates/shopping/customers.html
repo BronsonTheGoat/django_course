@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Customers</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    </head>
+    <body>
+        <div class="container">
+              <nav>
+                    <input type="checkbox" id="nav" class="hidden">
+                    <label for="nav" class="nav-btn">
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                    </label>
+                    <div class="logo">
+                          <a href="#">BRAND</a>
+                    </div>
+                    <div class="nav-wrapper">
+                          <ul>
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                                <li><a href="{% url 'customer_list' %}">Customers</a></li>
+                                <li><a href="{% url 'product_list' %}">Products</a></li>
+                          </ul>
+                    </div>
+              </nav>
+        </div>
+
+        <main>
+            {% if customers %}
+            <h3>Customers:</h3>
+
+                <ul>
+                {% for customer in customers %}
+
+                    <li>{{ customer.first_name }} {{ customer.last_name|upper }} ({{ customer.id }})</li>
+
+                {% endfor %}
+                </ul>
+            
+            {% else %}
+            <p>No customer.</p>
+            {% endif %}
+        </mian>
+        <script src="" async defer></script>
+    </body>
+</html>
