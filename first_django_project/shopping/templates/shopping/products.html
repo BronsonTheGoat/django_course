@@ -33,10 +33,18 @@
         </div>
 
         <main>
-            {% if products %}
             <p></p>
             <h3>Products:</h3>
+            <form method="get">
                 <table>
+                    {{ form.as_table }}
+                </table>
+                    <input type="submit" value="Search">
+                </form>
+                <br>
+                <hr>
+                {% if products %}
+                <table class="product">
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
@@ -46,7 +54,7 @@
                     <tr>
                         <td>{{ product.product_name }}</td>
                         <td>${{ product.price }}</td>
-                        <td><a href="{% url 'product_details' product_id=product.id %}">{{ product.id }}</td>
+                        <td><a href="{% url 'product_details' product_id=product.id %}">{{ product.id }}</a></td>
                     </tr>
                 {% endfor %}
                 </table>      

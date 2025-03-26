@@ -33,16 +33,44 @@
         </div>
 
         <main>
-            {% if customers %}
             <h3>Customers:</h3>
 
-                <ul>
+            {% comment %} <form method="get">
+                First name: <input type="text" name="first_name" placeholder="Search by first name">
+                Last name: <input type="text" name="last_name" placeholder="Search by last name">
+                Email: <input type="text" name="email" placeholder="Search by email">
+                <input type="submit" value="Search">
+            </form> {% endcomment %}
+            <form method="get">
+            <table>
+                {{ form.as_table }}
+            </table>
+                <input type="submit" value="Search">
+            </form>
+            <br>
+            <hr>
+
+            {% if customers %}
+            <table class="customers">
+                <tr>
+                    <th>id</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Phone</th>
+                </tr>
                 {% for customer in customers %}
-
-                    <li>{{ customer.first_name }} {{ customer.last_name|upper }} ({{ customer.id }})</li>
-
+                    <tr>
+                        <td><a href="{% url 'customer_details' customer_id=customer.id %}">{{ customer.id }}</a></td>
+                        <td>{{ customer.first_name }}</td>
+                        <td>{{ customer.last_name }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>{{ customer.age }}</td>
+                        <td>{{ customer.phone }}</td>
+                    </tr>
                 {% endfor %}
-                </ul>
+            </table>
             
             {% else %}
             <p>No customer.</p>

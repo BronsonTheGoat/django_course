@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customers</title>
+  <link rel="stylesheet" href="{% static 'css/master.css' %}">
+</head>
+<body>
+<p><a href="{% url 'index' %}">Home</a></p>
+
+
+<h3>Django form nélkül 1 sorban</h3>
+<form method="get">
+    First name: <input type="text" name="first_name" placeholder="Search by first name" required>
+    Last name: <input type="text" name="last_name" placeholder="Search by last name">
+    Email: <input type="text" name="email" placeholder="Search by email">
+    <input type="submit" value="Search">
+</form>
+
+<!--<h3>Django form nélkül több sorban</h3>-->
+<!--<form method="get">-->
+<!--    <p>First name: <input type="text" name="first_name" placeholder="Search by first name"></p>-->
+<!--    <p>Last name: <input type="text" name="last_name" placeholder="Search by last name"></p>-->
+<!--    <p>Email: <input type="text" name="email" placeholder="Search by email"></p>-->
+<!--    <p><input type="submit" value="Search"></p>-->
+<!--</form>-->
+
+<h3>Bekezdés</h3>
+<form method="get">
+    {{ form.as_p }}
+    <input type="submit" value="Search">
+</form>
+<!--<h3>Lista</h3>-->
+<!--<form method="get">-->
+<!--    {{ form.as_ul }}-->
+<!--    <input type="submit" value="Search">-->
+<!--</form>-->
+<!--<h3>Táblázat 1 sorban</h3>-->
+<!--<form method="get">-->
+<!--    {{ form.as_table }}-->
+<!--    <input type="submit" value="Search">-->
+<!--</form>-->
+<!--<h3>Táblázat több sorban</h3>-->
+<!--<form method="get">-->
+<!--<table>-->
+<!--    {{ form.as_table }}-->
+<!--</table>-->
+<!--    <input type="submit" value="Search">-->
+<!--</form>-->
+<!--<h3>Egyedi táblázat</h3>-->
+<!--<form method="get">-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td> {{ form.first_name.label_tag }}</td>-->
+<!--        <td> {{ form.first_name }}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td> {{ form.last_name.label_tag }}</td>-->
+<!--        <td> {{ form.last_name }}</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <td> {{ form.email.label_tag }}</td>-->
+<!--        <td> {{ form.email }}</td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--<input type="submit" value="Search">-->
+<!--</form>-->
+
+
+ {% if customers %}
+<h2>CUSTOMERS:</h2>
+    <ul>
+      {% for customer in customers %}
+        <li>{{ customer.first_name }} {{ customer.last_name|upper }}
+          <a href="{% url 'customer_details' customer_id=customer.id %}">({{ customer.id }})</a>
+          </li>
+      {% endfor %}
+    </ul>
+ {% else %}
+  <p>No customer.</p>
+{% endif %}
+</body>
+</html>

@@ -16,7 +16,7 @@ body {
       height: 100vh;
       font-family: Poppins;
       font-weight: 400;
-      background: url('{% static "background-img.jpg" %}');
+      background: url(background-img.jpg);
       background-position: center;
       background-size: cover;
 }
@@ -69,7 +69,15 @@ nav ul li a {
 }
 
 main {
-      margin: 10% 5%;
+      margin: 8% 3%;
+}
+
+.customers, .customers th, .customers td,
+.product, .product th, .product td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+      background-color: rgba(255,255,255,0.2);
 }
 
 @media screen and (max-width: 864px) {
