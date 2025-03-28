@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Book details</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+              <nav>
+                    <input type="checkbox" id="nav" class="hidden">
+                    <label for="nav" class="nav-btn">
+                          <i></i>
+                          <i></i>
+                          <i></i>
+                    </label>
+                    <div class="logo">
+                          <a href="#">BRAND</a>
+                    </div>
+                    <div class="nav-wrapper">
+                          <ul>
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'book_list' %}">Customers</a></li>
+                            {% comment %} <li><a href="{% url 'author_list' %}">Authors</a></li> {% endcomment %}
+                          </ul>
+                    </div>
+              </nav>
+        </div>
+
+
+        <main>
+            <h1>{{ book }}</h1>
+
+            <table class="books">
+                <tr>
+                    <td>ISBN:</td><td> {{ book.isbn }}</td>
+                </tr>
+                <tr>
+                    <td>Tile:</td><td> {{ book.title }} </td>
+                </tr>
+                <tr>
+                    <td>Author:</td><td> {{ book.author }} </td>
+                </tr>
+                <tr>
+                    <td>Published:</td><td> {{ book.published_year }} </td>
+                </tr>
+                <tr>
+                    <td>Pages:</td><td> {{ book.pages }} </td>
+                </tr>
+            </table>
+
+            <a href="{% url 'book_list' %}">Books</a>
+        </main>
+
+        <script src="" async defer></script>
+    </body>
+</html>
