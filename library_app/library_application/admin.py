@@ -5,7 +5,9 @@ from .models import Book, Author
 # Register your models here.
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['id', 'isbn', 'title', 'author', 'published_year', 'pages']
+    list_display = ['title', 'author', 'published_year']
+    list_filter = ['published_year', 'atuhoe']
+    ordering = ['title', 'published_year']
     
 
 admin.site.register(Book, BookAdmin)
