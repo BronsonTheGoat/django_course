@@ -80,6 +80,10 @@ main {
       background-color: rgba(255,255,255,0.2);
 }
 
+.search th, .add th{
+      text-align: left;
+}
+
 @media screen and (max-width: 864px) {
       .logo {
             padding: 0;

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product
+from .models import Product, Customer
 
 class CustomerForm(forms.Form):
     first_name = forms.CharField(max_length=10, required=True)
@@ -19,3 +19,15 @@ class ProductForm2(forms.ModelForm):
         # fields = ['name', 'price']
         fields = '__all__'
         # exclude = ['expiry_date']
+        
+class CustomerAddForm(forms.Form):
+    first_name = forms.CharField(max_length=10, required=True)
+    last_name = forms.CharField(max_length=20, required=True)
+    email = forms.EmailField(max_length=200, required=True)
+    age = forms.IntegerField(required=True)
+    phone_number = forms.CharField(max_length=15, required=False)
+    
+class CustomerAddForm2(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'

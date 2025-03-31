@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, loader
 
-from .forms import CustomerForm, ProductForm, ProductForm2
+from .forms import CustomerForm, CustomerAddForm, CustomerAddForm2, ProductForm, ProductForm2
 from .models import Customer, Product
 
 # Create your views here.
@@ -139,3 +139,26 @@ def get_customer_details(request, customer_id):
         return HttpResponse("No customer found!", status=404)
     context = {'customer': customer}
     return render(request, 'shopping/customer_details.html', context)
+
+def add_customer(request):
+    print(request.GET)
+    print(request.POST)
+    form = CustomerAddForm2(request.POST)
+    if form.is_valid():
+        
+        form.save() # Works only with ModelForm
+                
+        # first_name = form.cleaned_data.post('first_name')
+        # last_name = form.cleaned_data.post('last_name')
+        # email = form.cleaned_data.post('email')
+        # age = form.cleaned_data.post('age')
+        # phone_number = form.cleaned_data.post('phone_number')
+        # customers = customers.filter(
+        #     first_name__contains=first_name,
+        #     last_name__contains=last_name,
+        #     email__contains=email
+        # )
+        # Customer.objects.create(**form.cleaned_data)
+        
+    context = {"form":CustomerAddForm2()}
+    return render(request, 'shopping/customer_add.html', context)
