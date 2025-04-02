@@ -31,3 +31,8 @@ class CustomerAddForm2(forms.ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
+        
+class ProductAddForm2(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'

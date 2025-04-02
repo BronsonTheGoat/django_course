@@ -11,40 +11,50 @@
         <link rel="stylesheet" href="{% static 'css/master.css' %}">
     </head>
     <body>
-        <div class="container">
-              <nav>
-                    <input type="checkbox" id="nav" class="hidden">
-                    <label for="nav" class="nav-btn">
-                          <i></i>
-                          <i></i>
-                          <i></i>
-                    </label>
-                    <div class="logo">
-                          <a href="#">BRAND</a>
-                    </div>
-                    <div class="nav-wrapper">
-                          <ul>
-                            <li><a href="{% url 'index' %}">Home</a></li>
-                            <li><a href="{% url 'customer_list' %}">Customers</a></li>
-                            <li><a href="{% url 'product_list' %}">Products</a></li>
-                          </ul>
-                    </div>
-              </nav>
-        </div>
-
+        {% include "shopping/header.html" %}
 
         <main>
             <h1>{{ customer }}</h1>
 
-            <ul>
-                <li>First name: {{ customer.first_name }}</li>
-                <li>Last name: {{ customer.last_name }} </li>
-                <li>Email: {{ customer.email }} </li>
-                <li>Age: {{ customer.age }} </li>
-                <li>Phone: {% if customer.phone_number %} {{ customer.phone_number }} {% else %} - {% endif %}</li>
-            </ul>
+            <table class="customers">
+                <tr>
+                    <th>First name:</th>
+                    <th>Last name:</th>
+                    <th>Email:</th>
+                    <th>Age:</th>
+                    <th>Phone:</th>
+                    <th>Address:</th>
+                    <th>Customer addresses:</th>
+                </tr>
+                <tr>
+                    <td> {{ customer.first_name }}</td>
+                    <td> {{ customer.last_name }} </td>
+                    <td> {{ customer.email }} </td>
+                    <td> {{ customer.age }} </td>
+                    <td> {% if customer.phone_number %} {{ customer.phone_number }} {% else %} - {% endif %}</td>
+                    <td> {% if customer.address %} {{ customer.address }} {% else %} - {% endif %} </td>
+                    <td> 
+                    {% if customer.customer_addresses.all %}
+                        <ul>
+                        {% for customer_address in customer.customer_addresses.all %}
+                            {% if customer.address %} 
+                            
+                            <li>Country: {{ customer.address.country }} </li>
+                            <li>Zip code: {{ customer.address.zip_code }} </li>
+                            <li>City: {{ customer.address.city }} </li>
+                            <li>Street: {{ customer.address.street }} </li>
+                            <li>House number: {{ customer.address.house_number }} </li>
+                            
+                            {% else %} - {% endif %}
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        -
+                    {% endif %}
+                    </td>
+                </tr>
+            </table>
 
-            <a href="{% url 'customer_list' %}">Customers</a>
         </main>
 
         <script src="" async defer></script>

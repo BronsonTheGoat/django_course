@@ -1,7 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render, loader
+from django.shortcuts import render, loader,  redirect
 
-from .forms import CustomerForm, CustomerAddForm, CustomerAddForm2, ProductForm, ProductForm2
+from .forms import CustomerForm, CustomerAddForm, CustomerAddForm2, ProductForm, ProductForm2, ProductAddForm2
 from .models import Customer, Product
 
 # Create your views here.
@@ -147,6 +147,7 @@ def add_customer(request):
     if form.is_valid():
         
         form.save() # Works only with ModelForm
+        return redirect("customer_list")
                 
         # first_name = form.cleaned_data.post('first_name')
         # last_name = form.cleaned_data.post('last_name')
@@ -162,3 +163,12 @@ def add_customer(request):
         
     context = {"form":CustomerAddForm2()}
     return render(request, 'shopping/customer_add.html', context)
+
+def add_product(request):
+    form = ProductAddForm2(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect("product_list")
+        
+    context = {"form":ProductAddForm2()}
+    return render(request, "shopping/product_add.html", context)
