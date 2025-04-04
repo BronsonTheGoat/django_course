@@ -11,3 +11,14 @@ class Book(models.Model):
     
     def __str__(self):
         return f"{self.title} - {self.author}"
+    
+class Autor(models.Model):
+    name = models.CharField(max_length=100)
+    birth_date = models.DateField()
+    birth_place = models.CharField(max_length=50)
+    nationality = models.CharField(max_length=50)
+    decease_date = models.DateField(blank=True, null=True)
+    decease_place = models.CharField(max_length=50, blank=True, null=True)
+    
+    def __str__(self):
+        return f"{self.name}"
