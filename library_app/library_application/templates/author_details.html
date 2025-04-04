@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Author details</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+        {% include "header.html" %}
+
+
+        <main>
+            <h1>{{ author }}</h1>
+
+            <table class="authors">
+                <tr>
+                    <td>Name:</td><td> {{ author.name }}</td>
+                </tr>
+                <tr>
+                    <td>Birth date:</td><td> {{ author.birth_date }} </td>
+                </tr>
+                <tr>
+                    <td>Birth place:</td><td> {{ author.birth_place }} </td>
+                </tr>
+                <tr>
+                    <td>Nationality:</td><td> {{ author.nationality }} </td>
+                </tr>
+                {% if author.decease_date %}
+                <tr>
+                    <td>Decease date:</td><td> {{ author.decease_date }} </td>
+                </tr>
+                {% endif %}
+                {% if author.decease_place %}
+                <tr>
+                    <td>Decease place:</td><td> {{ author.decease_place }} </td>
+                </tr>
+                {% endif %}
+                <td> 
+                    {% if author.books %}
+                        <h3>Books</h3>
+                        <ul>
+                        {% for book in author.books.all %}
+                            {% if author.books %}
+                                <li>ISBN: {{ book.isbn }} </li>
+                                <li>Title: {{ book.title }} </li>
+                                <li>Publised year: {{ book.published_year }} </li>
+                                <li>Pages: {{ book.pages }} </li>
+                                <hr>                            
+                            {% else %} - {% endif %}
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        -
+                    {% endif %}
+            </table>
+
+        </main>
+
+        <script src="" async defer></script>
+    </body>
+</html>

@@ -20,5 +20,5 @@
     b) Készíts egy management command-ot, amely beolvas egy csv fájlt és feltölti a megfelelő
     adatokat a Book táblába!
     Kezeld azt az esetet is, ha a megadott szerző még nem szerepel az adatbázisban:
-    hagyd ki az adott sort, és írj ki hibaüzenetet!
+  X  hagyd ki az adott sort, és írj ki hibaüzenetet!
 """

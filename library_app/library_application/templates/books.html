@@ -11,26 +11,7 @@
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
     <body>
-        <div class="container">
-            <nav>
-                <input type="checkbox" id="nav" class="hidden">
-                <label for="nav" class="nav-btn">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </label>
-                <div class="logo">
-                    <a href="#">BRAND</a>
-                </div>
-                <div class="nav-wrapper">
-                    <ul>
-                        <li><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="{% url 'book_list' %}">Books</a></li>
-                        {% comment %} <li><a href="{% url 'author_list' %}">Authors</a></li> {% endcomment %}
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        {% include "header.html" %}
 
         <main>
             <h3>Books:</h3>

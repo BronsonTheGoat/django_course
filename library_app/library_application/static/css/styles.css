@@ -92,7 +92,9 @@ main h1{
 }
 
 .books, .books th, .books td,
-.books, .books th, .books td {
+.books, .books th, .books td,
+.authors, .authors th, .authors td,
+.authors, .authors th, .authors td {
       border: 1px solid grey;
       border-collapse: collapse;
       padding: 5px;

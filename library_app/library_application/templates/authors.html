@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Books</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+        {% include "header.html" %}
+
+        <main>
+            <h3>Authors:</h3>
+            <form method="get">
+            <table>
+                {{ form.as_table }}
+            </table>
+                <input type="submit" value="Search">
+            </form>
+            <br>
+            <hr>
+
+            {% if authors %}
+            <table class="authors">
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Birth date</th>
+                    <th>Birth place</th>
+                    <th>Nationality</th>
+                    <th>Decease date</th>
+                    <th>Decease place</th>
+                </tr>
+                {% for author in authors %}
+                    <tr>
+                        <td><a href="{% url 'author_details' author_id=author.id %}">{{ author.id }}</a></td>
+                        <td>{{ author.name }}</td>
+                        <td>{{ author.birth_date }}</td>
+                        <td>{{ author.birth_place }}</td>
+                        <td>{{ author.nationality }}</td>
+                        <td>
+                        {% if author.decease_date %}
+                        {{ author.decease_date }}
+                        {% else %}
+                        -
+                        {% endif %}
+                        </td>
+                        <td>
+                        {% if author.decease_palce %}
+                        {{ author.decease_palce }}
+                        {% else %}
+                        -
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            
+            {% else %}
+            <p>No authors.</p>
+            {% endif %}
+        </mian>
+        <script src="" async defer></script>
+    </body>
+</html>
