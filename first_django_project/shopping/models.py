@@ -59,6 +59,26 @@ class Product(models.Model):
     storage_quantity = models.IntegerField(default=0)
     
     def __str__(self):
-        return f"{self.product_name}: {self.price}"
+        return f"{self.product_name}"
 
 # orders
+
+class Purchase(models.Model):
+    purchase_date = models.DateField()
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name='purchases')
+    products = models.ManyToManyField(Product, through='PurchaseItem')
+
+    def __str__(self):
+        return f'{self.customer} ({self.purchase_date})'
+    
+    class Meta:
+        ordering = ["purchase_date"]
+
+
+class PurchaseItem(models.Model):
+    quantity = models.IntegerField()
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    purchase = models.ForeignKey(Purchase, on_delete=models.PROTECT, related_name='items')
+
+    def __str__(self):
+        return f'{self.quantity} x {self.product.product_name}'

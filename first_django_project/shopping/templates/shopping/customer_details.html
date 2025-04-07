@@ -8,7 +8,7 @@
         <title>Product details</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'css/master.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}">
     </head>
     <body>
         {% include "shopping/header.html" %}
@@ -25,6 +25,7 @@
                     <th>Phone:</th>
                     <th>Address:</th>
                     <th>Customer addresses:</th>
+                    <th>Purchases:</th>
                 </tr>
                 <tr>
                     <td> {{ customer.first_name }}</td>
@@ -37,17 +38,47 @@
                     {% if customer.customer_addresses.all %}
                         <ul>
                         {% for customer_address in customer.customer_addresses.all %}
-                            {% if customer.address %} 
-                            
-                            <li>Country: {{ customer.address.country }} </li>
-                            <li>Zip code: {{ customer.address.zip_code }} </li>
-                            <li>City: {{ customer.address.city }} </li>
-                            <li>Street: {{ customer.address.street }} </li>
-                            <li>House number: {{ customer.address.house_number }} </li>
-                            
-                            {% else %} - {% endif %}
+                            {% if customer.address %}                            
+                                <li>Country: {{ customer.address.country }} </li>
+                                <li>Zip code: {{ customer.address.zip_code }} </li>
+                                <li>City: {{ customer.address.city }} </li>
+                                <li>Street: {{ customer.address.street }} </li>
+                                <li>House number: {{ customer.address.house_number }} </li>                            
+                            {% else %}
+                                -
+                            {% endif %}
                         {% endfor %}
                         </ul>
+                        <hr>
+                    {% else %}
+                        -
+                    {% endif %}
+                    </td>
+                    <td> 
+                    {% if customer.purchases.all %}
+                        <table>
+                        {% for purchase in customer.purchases.all %} {% comment "" %} |dictsort:"purchase_date" - orders the data {% endcomment %}
+                            <tr>
+                                <th colspan=3>{{ forloop.counter }} - {{ purchase.purchase_date|date:"Y/m/d" }}</th>
+                                {% if purchase.items.all %}
+                                    <tr>
+                                        <td>Product</td>
+                                        <td>Price</td>
+                                        <td>Quantity</td>
+                                    </tr>
+                                    {% for item in purchase.items.all %} 
+                                    <tr>
+                                        <td>{{ item.product.product_name }}</td>
+                                        <td>{{ item.product.price }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            {% endfor %}
+                            </tr>
+                        </table>
                     {% else %}
                         -
                     {% endif %}

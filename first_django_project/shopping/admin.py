@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer, Product, HomeAddress, CustomerAddress
+from .models import Customer, Product, HomeAddress, CustomerAddress, Purchase, PurchaseItem
 
 # Register your models here.
 
@@ -10,6 +10,10 @@ class AddressInline(admin.StackedInline):
     
 class CustomerAddressInline(admin.StackedInline):
     model = CustomerAddress
+    extra = 0
+    
+class PurchaseInline(admin.TabularInline):
+    model = PurchaseItem
     extra = 0
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -53,9 +57,15 @@ class CustomerAddressAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['id', 'product_name', 'price']
+    
+    
+class PurchaseAdmin(admin.ModelAdmin):
+    inlines = [PurchaseInline]
 
 
 admin.site.register(Customer, CustomerAdmin)
 # admin.site.register(HomeAddress, HomeAddressAdmin)
 # admin.site.register(CustomerAddress)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Purchase, PurchaseAdmin)
+admin.site.register(PurchaseItem)

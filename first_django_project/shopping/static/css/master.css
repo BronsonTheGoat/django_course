@@ -16,9 +16,11 @@ body {
       height: 100vh;
       font-family: Poppins;
       font-weight: 400;
-      background: url(background-img.jpg);
+      background: url(../images/shopping.jpg);
       background-position: center;
       background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
 }
 
 nav {
@@ -33,7 +35,7 @@ nav {
 }
 
 .logo a {
-      color: #000;
+      color: #fff;
       text-transform: uppercase;
       font-weight: 700;
       font-size: 18px;
@@ -60,16 +62,35 @@ nav ul li:last-child {
 nav ul li a {
       display: inline-block;
       outline: none;
-      color: #000;
+      color: #555;
       text-transform: uppercase;
       text-decoration: none;
       font-size: 14px;
       letter-spacing: 1.2px;
-      font-weight: 600;
+      font-weight: 600;      
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 5px;
+      padding: 5px;
+      transition: ease 5ms;
+}
+
+nav ul li a:hover nav ul li a .active {
+      background-color: #fff;
+      color: #000;
+      
+}
+
+nav .icon {
+      width: 18px;
+      height: 18px;
+      color: #fff;
+      margin-bottom: -5px;
 }
 
 main {
       margin: 8% 3%;
+      padding: 15px;
+      background-color: rgba(255,255,255,0.4);
 }
 
 .customers, .customers th, .customers td,
@@ -78,6 +99,9 @@ main {
       border-collapse: collapse;
       padding: 5px;
       background-color: rgba(255,255,255,0.2);
+}
+.customers table, .product table {
+      border-collapse: collapse;
 }
 
 .search th, .add th{
