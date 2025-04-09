@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Product details</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    </head>
+    <body>
+        {% include "shopping/header.html" %}
+
+
+        <main>
+            <h1>Update product: {{ product }} </h1>            
+            <form method="POST" enctype="multipart/form-data">
+                <table class="add">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="Update">
+            </form>
+            <a href="{% url 'product_details' product_id=product.id %}">Back to details</a>
+        </main>
+
+        <script src="" async defer></script>
+    </body>
+</html>

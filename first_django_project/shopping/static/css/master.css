@@ -78,7 +78,7 @@ nav ul li a:hover, nav ul li a .active {
       background-color: #fff;
 }
 
-nav .icon {
+nav .icon, .icon {
       width: 18px;
       height: 18px;
       color: #fff;
@@ -89,6 +89,8 @@ main {
       margin: 8% 3%;
       padding: 15px;
       background-color: rgba(255,255,255,0.4);
+      border: 2px solid #555;
+      border-radius: 15px;
 }
 
 .customers, .customers th, .customers td,

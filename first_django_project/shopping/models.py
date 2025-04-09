@@ -21,7 +21,7 @@ class HomeAddress(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name="address")
     
     def __str__(self):
-        return f"{self.zip_code}, {self.city} {self.street} {self.house_number}"
+        return f"{self.zip_code}, {self.city}, {self.street} {self.house_number}"
     
     class Meta:
         verbose_name = "Home address"
@@ -57,6 +57,9 @@ class Product(models.Model):
     expiry_dte = models.DateField(blank=True, null=True)
     is_discounted = models.BooleanField(default=False)
     storage_quantity = models.IntegerField(default=0)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    last_modified = models.DateTimeField(auto_now=True, blank=True, null=True)
+    product_image = models.ImageField(upload_to='products/', blank=True, null=True)
     
     def __str__(self):
         return f"{self.product_name}"

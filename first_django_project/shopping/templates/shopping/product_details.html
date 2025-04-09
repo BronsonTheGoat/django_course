@@ -17,12 +17,33 @@
         <main>
             <h1>{{ product.product_name }}</h1>
 
-            <ul>
-                <li>Price: {{ product.price }}</li>
-                <li>Storage: {{product.storage_quantity}} </li>
-                <li>Expire: {{product.expiry_dte}} </li>
-                <li>Discounted: {% if product.is_discounted %} Yes {% else %} No {% endif %} </li>
-            </ul>
+            <table class="product">
+                <tr>
+                    <th>Price:</th>
+                    <th>Storage:</th>
+                    <th>Expire:</th>
+                    <th>Discounted:</th>
+                    <th>Edit:</th>                    
+                    <th>Delete:</th>                    
+                </tr>
+                <tr>
+                    <td> {{ product.price }}</td>
+                    <td> {{ product.storage_quantity }} </td>
+                    <td> {{ product.expiry_dte }} </td>
+                    <td> {% if product.is_discounted %} Yes {% else %} No {% endif %} </td>
+                    <td><a href="{% url 'product_update' product_id=product.id %}"><img class="icon" src={% static "images/edit.png" %} alt="edit"></a></td>
+                    <td><a href="{% url 'product_delete' product_id=product.id %}"><img class="icon" src={% static "images/delete.png" %} alt="delete"></a></td>
+                </tr>
+            </table>            
+            {% if product.product_image %}
+                <p><img src="{{ product.product_image.url }}" alt="{{ product.name }}" width="200" /></p>
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+
+            {% if error_message %}
+            <p>{{ error_message }}</p>
+            {% endif %}
 
             <a href="{% url 'product_list' %}">Products</a>
         </main>

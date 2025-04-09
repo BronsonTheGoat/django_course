@@ -56,8 +56,8 @@ class CustomerAddressAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'product_name', 'price']
-    
+    list_display = ["id", "product_name", "price"]
+    readonly_fields = ["created", "last_modified"]
     
 class PurchaseAdmin(admin.ModelAdmin):
     inlines = [PurchaseInline]

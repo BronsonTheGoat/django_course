@@ -26,6 +26,7 @@
                     <th>Address:</th>
                     <th>Customer addresses:</th>
                     <th>Purchases:</th>
+                    <th>Edit:</th>
                 </tr>
                 <tr>
                     <td> {{ customer.first_name }}</td>
@@ -83,9 +84,9 @@
                         -
                     {% endif %}
                     </td>
+                    <td><a href="{% url 'customer_update' customer_id=customer.id %}"><img class="icon" src={% static "images/edit.png" %} alt="edit"></a></td>
                 </tr>
             </table>
-
         </main>
 
         <script src="" async defer></script>

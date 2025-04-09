@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.db.models import ProtectedError
 from django.shortcuts import render, loader,  redirect
 
 from .forms import CustomerForm, CustomerAddForm, CustomerAddForm2, ProductForm, ProductForm2, ProductAddForm2
@@ -172,3 +173,77 @@ def add_product(request):
         
     context = {"form":ProductAddForm2()}
     return render(request, "shopping/product_add.html", context)
+
+def update_product(request, product_id):
+    # print(request)
+    # print('GET', request.GET)
+    # print('POST', request.POST)
+
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+
+    if request.POST:
+        form = ProductForm2(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            print('DATA:')
+            print(form.data)
+            print(form.cleaned_data)
+            print('____________')
+            form.save()
+            return redirect('product_details', product_id=product_id)
+
+    form = ProductForm2(instance=product)
+    context = {
+        'form': form,
+        'product': product
+    }
+    return render(request, 'shopping/product_update.html', context)
+
+def update_customer(request, customer_id):
+    # print(request)
+    # print('GET', request.GET)
+    # print('POST', request.POST)
+
+    try:
+        customer = Customer.objects.get(id=customer_id)
+    except Customer.DoesNotExist:
+        return HttpResponse('Customer not found', status=404)
+
+    if request.POST:
+        form = CustomerAddForm2(request.POST, instance=customer)
+        if form.is_valid():
+            print('DATA:')
+            print(form.data)
+            print(form.cleaned_data)
+            print('____________')
+            form.save()
+            return redirect('customer_details', customer_id=customer_id)
+
+    form = CustomerAddForm2(instance=customer)
+    context = {
+        'form': form,
+        'customer': customer
+    }
+    return render(request, 'shopping/customer_update.html', context)
+
+def delete_product(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+
+    print(product)
+    try:
+        product.delete()
+        return render(request, 'shopping/product_delete_success.html', {})
+        # return redirect('product_list')
+    except ProtectedError:
+        context = {
+            'product': product,
+            'error_message': 'This product cannot be deleted'
+        }
+        # return render(request, 'shopping/product_details.html', context)
+        return render(request, 'shopping/product_delete_failed.html', context)
+        # return HttpResponse('This product cannot be deleted')ű
