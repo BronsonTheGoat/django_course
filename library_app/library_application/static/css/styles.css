@@ -16,7 +16,7 @@ body {
       height: 100vh;
       font-family: Poppins;
       font-weight: 400;
-      background: url(library-background.jpg);
+      background: url(../img/library-background.jpg);
       background-position: center;
       background-size: cover;
 }
@@ -74,17 +74,21 @@ nav ul li a {
       font-weight: 600;
 }
 
-main {
+main{
       margin: 80px auto;
       padding: 25px;
       border-radius: 15px;
       background-color: rgba(255,255,255,0.4);
       width: 50%;
+      text-align: center;
 }
 
 main h1{
-      text-align: center;
       text-shadow: 2px 2px rgba(255, 255, 255, 0.7);
+}
+
+main .index-img{
+      width: 50%;
 }
 
 .books{
