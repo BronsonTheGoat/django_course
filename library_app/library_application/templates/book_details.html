@@ -25,7 +25,16 @@
                     <td>Tile:</td><td> {{ book.title }} </td>
                 </tr>
                 <tr>
-                    <td>Author:</td><td> {{ book.author }} </td>
+                    <td>Author:</td>
+                    <td> 
+                        {% if book.author %}
+                            {% for author in book.author.all %}
+                                {{ author.name }} 
+                            {% endfor %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
                 </tr>
                 <tr>
                     <td>Published:</td><td> {{ book.published_year }} </td>

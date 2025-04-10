@@ -21,4 +21,5 @@ class Book(models.Model):
     pages = models.IntegerField()
     
     def __str__(self):
-        return f"{self.title} - {self.author}"
+        authors = ", ".join([str(author) for author in self.author.all()])
+        return f"{self.title} - {authors}"

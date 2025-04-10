@@ -5,7 +5,7 @@ from .models import Book, Author
 # Register your models here.
 
 class BookInline(admin.StackedInline):
-    model = Book.author.through
+    model = Author.books.through
     extra = 0
     
 class AuthorInline(admin.TabularInline):
@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ["title", "published_year"]
     list_filter = ["published_year"]
     ordering = ["title", "published_year"]
-    filter_horizontal = ["author"]
+    filter_horizontal = ["author",]
     inlines = [AuthorInline]
     
 

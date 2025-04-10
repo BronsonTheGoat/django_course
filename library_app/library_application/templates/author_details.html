@@ -44,15 +44,15 @@
                     {% if author.books %}
                         <h3>Books</h3>
                         <ul>
-                        {% for book in author.books.all %}
-                            {% if author.books %}
+                        {% if author.books %}
+                            {% for book in author.books.all %}
                                 <li>ISBN: {{ book.isbn }} </li>
                                 <li>Title: {{ book.title }} </li>
                                 <li>Publised year: {{ book.published_year }} </li>
                                 <li>Pages: {{ book.pages }} </li>
-                                <hr>                            
-                            {% else %} - {% endif %}
-                        {% endfor %}
+                                <hr>  
+                            {% endfor %}                          
+                        {% else %} - {% endif %}
                         </ul>
                     {% else %}
                         -
