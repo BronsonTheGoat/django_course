@@ -5,16 +5,15 @@ from .models import Book, Author
 # Register your models here.
 
 class BookInline(admin.StackedInline):
-    model = Book
+    model = Book.author.through
     extra = 0
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ["title", "author", "published_year"]
-    list_filter = ["published_year", "author"]
+    list_display = ["title", "published_year"]
+    list_filter = ["published_year"]
     ordering = ["title", "published_year"]
+    filter_horizontal = ["author"]
     
-
-admin.site.register(Book, BookAdmin)
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "birth_date", "birth_place"]
@@ -22,4 +21,5 @@ class AuthorAdmin(admin.ModelAdmin):
     ordering = ["name"]
     inlines = [BookInline]
 
+admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
