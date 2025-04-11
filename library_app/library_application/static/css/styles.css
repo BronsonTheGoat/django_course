@@ -75,6 +75,11 @@ nav ul li a {
 }
 
 main{
+      height: 80vh;
+      width: 100vw;
+}
+
+.main-content{
       margin: 80px auto;
       padding: 25px;
       border-radius: 15px;
@@ -108,6 +113,15 @@ main .index-img{
 .books tr td:nth-child(2){
       text-align: right;
 }
+
+footer {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      background-color: #f1f1f1;
+  }
 
 @media screen and (max-width: 864px) {
       .logo {

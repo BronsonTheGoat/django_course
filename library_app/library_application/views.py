@@ -1,7 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render, loader
+from django.shortcuts import render, loader, redirect
 
-from .forms import BookForm, AuthorForm
+from .forms import BookForm, BookAddForm, AuthorForm
 from .models import Book, Author
 
 # Create your views here.
@@ -60,3 +60,35 @@ def get_author_details(request, author_id):
         return HttpResponse("No author found!", status=404)
     context = {'author': author}
     return render(request, 'author_details.html', context)
+
+def add_book(request):
+    form = BookAddForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect("book_list")
+        
+    context = {"form":BookAddForm()}
+    return render(request, "book_add.html", context)
+
+def update_book(request, book_id):
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+
+    if request.POST:
+        form = BookAddForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            print('DATA:')
+            print(form.data)
+            print(form.cleaned_data)
+            print('____________')
+            form.save()
+            return redirect('book_details', book_id=book_id)
+
+    form = BookAddForm(instance=book)
+    context = {
+        'form': form,
+        'book': book
+    }
+    return render(request, 'book_update.html', context)

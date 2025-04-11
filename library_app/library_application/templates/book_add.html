@@ -1,0 +1,43 @@
+{% load static %}
+
+{% include "header.html" %}
+
+
+        <main>
+            <h1>New book</h1>            
+            <form method="POST">
+                <table class="add">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                </table>
+                <img id="preview" src="" alt="">
+                <input type="submit" value="Add">
+            </form>
+        </main>
+
+        {% include "footer.html" %}
+        <script src="" async defer>            
+            document.addEventListener("DOMContentLoaded", function () {
+                const fileInput = document.querySelector('input[type="file"]');
+                const preview = document.getElementById('preview');
+            
+                if (fileInput) {
+                    fileInput.addEventListener('change', function () {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                preview.setAttribute('src', e.target.result);
+                                preview.style.display = 'block';
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            preview.style.display = 'none';
+                            preview.setAttribute('src', '#');
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

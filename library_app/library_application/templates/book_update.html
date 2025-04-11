@@ -1,0 +1,44 @@
+{% load static %}
+
+{% include "header.html" %}
+
+
+        <main>
+            <h1>Update book: {{ book }} </h1>            
+            <form method="POST" enctype="multipart/form-data">
+                <table class="add">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="Update">
+            </form>
+            <a href="{% url 'book_details' book_id=book.id %}">Back to details</a>
+            <img id="preview" src="" alt="">
+        </main>
+
+        {% include "footer.html" %}
+        <script src="" async defer>
+            document.addEventListener("DOMContentLoaded", function () {
+                const fileInput = document.querySelector('input[type="file"]');
+                const preview = document.getElementById('preview');
+            
+                if (fileInput) {
+                    fileInput.addEventListener('change', function () {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                preview.setAttribute('src', e.target.result);
+                                preview.style.display = 'block';
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            preview.style.display = 'none';
+                            preview.setAttribute('src', '#');
+                        }
+                    });
+                }
+            });                
+        </script>
+    </body>
+</html>

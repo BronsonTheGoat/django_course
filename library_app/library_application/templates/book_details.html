@@ -1,17 +1,6 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Book details</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    </head>
-    <body>
-        {% include "header.html" %}
+{% include "header.html" %}
 
 
         <main>
@@ -46,14 +35,19 @@
                     <td colspan=2>Cover image</td>
                 </tr>
                 <tr>
-                    <td colspan=2>
-                        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
+                    <td colspan=2>           
+                        {% if book.cover_image %}
+                            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
                     </td>
                 </tr>
             </table>
 
         </main>
 
+        {% include "footer.html" %}
         <script src="" async defer></script>
     </body>
 </html>
