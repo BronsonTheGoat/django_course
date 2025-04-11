@@ -4,50 +4,62 @@
 
 
         <main>
-            <h1>{{ book }}</h1>
+            <div class="main-content">
+                <h1>{{ book }}</h1>
 
-            <table class="books">
-                <tr>
-                    <td>ISBN:</td><td> {{ book.isbn }}</td>
-                </tr>
-                <tr>
-                    <td>Tile:</td><td> {{ book.title }} </td>
-                </tr>
-                <tr>
-                    <td>Author:</td>
-                    <td> 
-                        {% if book.author %}
-                            {% for author in book.author.all %}
-                                {{ author.name }} 
-                            {% endfor %}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Published:</td><td> {{ book.published_year }} </td>
-                </tr>
-                <tr>
-                    <td>Pages:</td><td> {{ book.pages }} </td>
-                </tr>
-                <tr>
-                    <td colspan=2>Cover image</td>
-                </tr>
-                <tr>
-                    <td colspan=2>           
-                        {% if book.cover_image %}
-                            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
-                        {% else %}
-                            <p>No image available</p>
-                        {% endif %}
-                    </td>
-                </tr>
-            </table>
-
+                <table class="books">
+                    <tr>
+                        <td>ISBN:</td><td> {{ book.isbn }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tile:</td><td> {{ book.title }} </td>
+                    </tr>
+                    <tr>
+                        <td>Author:</td>
+                        <td> 
+                            {% if book.author %}
+                                {% for author in book.author.all %}
+                                    {{ author.name }} 
+                                {% endfor %}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Published:</td><td> {{ book.published_year }} </td>
+                    </tr>
+                    <tr>
+                        <td>Pages:</td><td> {{ book.pages }} </td>
+                    </tr>
+                    <tr>
+                        <td colspan=2>Cover image</td>
+                    </tr>
+                    <tr>
+                        <td colspan=2>           
+                            {% if book.cover_image %}
+                                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Edit</td><td>Delete</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="{% url 'book_update' book_id=book.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
+                        <td>
+                            <a href=""><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </main>
 
         {% include "footer.html" %}
-        <script src="" async defer></script>
+        <script></script>
     </body>
 </html>

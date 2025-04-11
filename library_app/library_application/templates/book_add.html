@@ -4,19 +4,21 @@
 
 
         <main>
-            <h1>New book</h1>            
-            <form method="POST">
-                <table class="add">
-                    {% csrf_token %}
-                    {{ form.as_table }}
-                </table>
-                <img id="preview" src="" alt="">
-                <input type="submit" value="Add">
-            </form>
+            <div class="main-content">
+                <h1>New book</h1>            
+                <form method="POST" enctype="multipart/form-data">
+                    <table class="add">
+                        {% csrf_token %}
+                        {{ form.as_table }}
+                    </table>
+                    <img id="preview" src="" alt="">
+                    <input type="submit" value="Add">
+                </form>
+            </div>
         </main>
 
         {% include "footer.html" %}
-        <script src="" async defer>            
+        <script>            
             document.addEventListener("DOMContentLoaded", function () {
                 const fileInput = document.querySelector('input[type="file"]');
                 const preview = document.getElementById('preview');
