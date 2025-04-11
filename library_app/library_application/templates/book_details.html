@@ -42,6 +42,14 @@
                 <tr>
                     <td>Pages:</td><td> {{ book.pages }} </td>
                 </tr>
+                <tr>
+                    <td colspan=2>Cover image</td>
+                </tr>
+                <tr>
+                    <td colspan=2>
+                        <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
+                    </td>
+                </tr>
             </table>
 
         </main>

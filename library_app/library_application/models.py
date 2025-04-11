@@ -18,7 +18,8 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ManyToManyField(Author, related_name="books")
     published_year = models.IntegerField()
-    pages = models.IntegerField()
+    pages = models.IntegerField()    
+    cover_image = models.ImageField(upload_to='covers/', blank=True, null=True)
     
     def __str__(self):
         authors = ", ".join([str(author) for author in self.author.all()])
