@@ -4,50 +4,51 @@
 
 
         <main>
-            <h1>{{ author }}</h1>
+            <div class="main-content">
+                <h1>{{ author }}</h1>
 
-            <table class="authors">
-                <tr>
-                    <td>Name:</td><td> {{ author.name }}</td>
-                </tr>
-                <tr>
-                    <td>Birth date:</td><td> {{ author.birth_date }} </td>
-                </tr>
-                <tr>
-                    <td>Birth place:</td><td> {{ author.birth_place }} </td>
-                </tr>
-                <tr>
-                    <td>Nationality:</td><td> {{ author.nationality }} </td>
-                </tr>
-                {% if author.decease_date %}
-                <tr>
-                    <td>Decease date:</td><td> {{ author.decease_date }} </td>
-                </tr>
-                {% endif %}
-                {% if author.decease_place %}
-                <tr>
-                    <td>Decease place:</td><td> {{ author.decease_place }} </td>
-                </tr>
-                {% endif %}
-                <td> 
-                    {% if author.books %}
-                        <h3>Books</h3>
-                        <ul>
-                        {% if author.books %}
-                            {% for book in author.books.all %}
-                                <li>ISBN: {{ book.isbn }} </li>
-                                <li>Title: {{ book.title }} </li>
-                                <li>Publised year: {{ book.published_year }} </li>
-                                <li>Pages: {{ book.pages }} </li>
-                                <hr>  
-                            {% endfor %}                          
-                        {% else %} - {% endif %}
-                        </ul>
-                    {% else %}
-                        -
+                <table class="authors">
+                    <tr>
+                        <td>Name:</td><td> {{ author.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Birth date:</td><td> {{ author.birth_date }} </td>
+                    </tr>
+                    <tr>
+                        <td>Birth place:</td><td> {{ author.birth_place }} </td>
+                    </tr>
+                    <tr>
+                        <td>Nationality:</td><td> {{ author.nationality }} </td>
+                    </tr>
+                    {% if author.decease_date %}
+                    <tr>
+                        <td>Decease date:</td><td> {{ author.decease_date }} </td>
+                    </tr>
                     {% endif %}
-            </table>
-
+                    {% if author.decease_place %}
+                    <tr>
+                        <td>Decease place:</td><td> {{ author.decease_place }} </td>
+                    </tr>
+                    {% endif %}
+                    <td> 
+                        {% if author.books %}
+                            <h3>Books</h3>
+                            <ul>
+                            {% if author.books %}
+                                {% for book in author.books.all %}
+                                    <li>ISBN: {{ book.isbn }} </li>
+                                    <li>Title: {{ book.title }} </li>
+                                    <li>Publised year: {{ book.published_year }} </li>
+                                    <li>Pages: {{ book.pages }} </li>
+                                    <hr>  
+                                {% endfor %}                          
+                            {% else %} - {% endif %}
+                            </ul>
+                        {% else %}
+                            -
+                        {% endif %}
+                </table>
+            </div>
         </main>
 
         {% include "footer.html" %}

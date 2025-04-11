@@ -115,7 +115,7 @@ main .index-img{
       filter: drop-shadow(10px 10px 7px lightblue);
 }
 
-.books{
+.books, .authors{
       margin: 0 auto;
 }
 
