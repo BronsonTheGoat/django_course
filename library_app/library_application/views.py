@@ -62,7 +62,7 @@ def get_author_details(request, author_id):
     return render(request, 'author_details.html', context)
 
 def add_book(request):
-    form = BookAddForm(request.POST)
+    form = BookAddForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
         return redirect("book_list")
