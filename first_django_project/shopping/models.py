@@ -54,7 +54,7 @@ class CustomerAddress(models.Model):
 class Product(models.Model):
     product_name = models.CharField(max_length=200)
     price = models.IntegerField()
-    expiry_dte = models.DateField(blank=True, null=True)
+    expiry_date = models.DateField(blank=True, null=True)
     is_discounted = models.BooleanField(default=False)
     storage_quantity = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)

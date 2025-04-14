@@ -166,7 +166,7 @@ def add_customer(request):
     return render(request, 'shopping/customer_add.html', context)
 
 def add_product(request):
-    form = ProductAddForm2(request.POST)
+    form = ProductAddForm2(request.POST, request.FILES)
     if form.is_valid():
         form.save()
         return redirect("product_list")
