@@ -92,7 +92,8 @@ nav ul li button {
 
 nav ul li a:hover, nav ul li a .active,
 nav ul li button:hover {
-      background-color: #fff;
+      background-color: #333;
+      color: #fff;
       cursor: pointer;
 }
 
@@ -190,18 +191,19 @@ main h1, main p{
             font-weight: 600;
             letter-spacing: 1.2px;
             transform: translateX(-20px);
-            transition: all 0.2s ease;
+      }
+
+      .nav-wrapper ul li form {
+            margin: 0;
+            padding: 0;
       }
 
       .nav-wrapper ul li button {
             padding: 10px 24px;
-            opacity: 0;
             color: #000;
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 1.2px;
-            transform: translateX(-20px);
-            transition: all 0.2s ease;
       }
 
       .nav-btn {
