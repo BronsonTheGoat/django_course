@@ -15,6 +15,14 @@
                       <li><a href="{% url 'index' %}"><img class="icon" src={% static "images/home.png" %} alt="home"> Home</a></li>
                       <li><a href="{% url 'customer_list' %}"><img class="icon" src={% static "images/group.png" %} alt="users"> Customers</a></li>
                       <li><a href="{% url 'product_list' %}"><img class="icon" src={% static "images/box.png" %} alt="products"> Products</a></li>
+                      {% if user.is_authenticated %}
+                        <li>
+                        <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit"><img class="icon" src={% static "images/logout.png" %} alt="products">Logout</button>
+                        </form>
+                        </li>
+                      {% endif %}
                 </ul>
           </div>
     </nav>

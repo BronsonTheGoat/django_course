@@ -62,7 +62,7 @@ class CustomerAddressAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(DjangoObjectActions, admin.ModelAdmin):
-    list_display = ["id", "product_name", "price", "is_discounted"]
+    list_display = ["id", "product_name", "price", "is_discounted", "storage_quantity"]
     readonly_fields = ["created", "last_modified"]
     # list_filter = [PriceRangeFilter]
     list_filter = [
@@ -78,9 +78,9 @@ class ProductAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     # @admin.action(description="Set products as discounted2")
     def set_discounted(modeladmin, request, queryset): # modeladmin is replacement of self
-        print(modeladmin)
-        print(request)
-        print(queryset)
+        # print(modeladmin)
+        # print(request)
+        # print(queryset)
         count = queryset.update(is_discounted=True, price=F("price")-100)
         modeladmin.message_user(request, f'Updated products: {count}')
 
@@ -88,17 +88,17 @@ class ProductAdmin(DjangoObjectActions, admin.ModelAdmin):
     
     @admin.action(description="Set products to full price")
     def set_full_price(modeladmin, request, queryset): # modeladmin is replacement of self
-        print(modeladmin)
-        print(request)
-        print(queryset)
+        # print(modeladmin)
+        # print(request)
+        # print(queryset)
         count = queryset.update(is_discounted=False, price=F("price")+100)
         modeladmin.message_user(request, f'Updated products: {count}')
         
-    change_actions = ['set_product_discounted', 'set_product_full_price']
+    change_actions = ['set_product_discounted', 'set_product_full_price', "buy_product"]
     
     def set_product_discounted(self, request, obj):
-        print(request)
-        print(obj)
+        # print(request)
+        # print(obj)
         if not obj.is_discounted:
             obj.is_discounted = True
             obj.price -= 100
@@ -111,8 +111,8 @@ class ProductAdmin(DjangoObjectActions, admin.ModelAdmin):
     set_product_discounted.short_description = "Discount"
             
     def set_product_full_price(self, request, obj):
-        print(request)
-        print(obj)
+        # print(request)
+        # print(obj)
         if obj.is_discounted:
             obj.is_discounted = False
             obj.price += 100
@@ -121,22 +121,30 @@ class ProductAdmin(DjangoObjectActions, admin.ModelAdmin):
         else:
             self.message_user(request, f'{obj} is already at full price!')
             
+    def buy_product(self, request, obj):
+        if obj.storage_quantity > 0:
+            obj.storage_quantity -= 1
+            obj.save()
+            self.message_user(request, f'{obj} has been bought.')
+        else:
+            self.message_user(request, f'{obj} is out of stock!')
+            
     def get_change_actions(self, request, object_id, form_url):
         actions = super().get_change_actions(request, object_id, form_url)
         actions = list(actions)
-        print(actions)
-        print(type(actions))
-        print(object_id)
+        # print(actions)
+        # print(type(actions))
+        # print(object_id)
         product = self.model.objects.get(pk=object_id)
         print(product)
         if product.is_discounted:
             actions.remove('set_product_discounted')
         if not product.is_discounted:
             actions.remove('set_product_full_price')
-        # if product.storage_quantity <= 0:
-        #     actions.remove('buy_product')
+        if product.storage_quantity <= 0:
+            actions.remove('buy_product')
 
-        print(actions)
+        # print(actions)
 
         return actions
     

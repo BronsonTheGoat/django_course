@@ -74,8 +74,26 @@ nav ul li a {
       transition: ease .5s;
 }
 
-nav ul li a:hover, nav ul li a .active {
+nav ul li button {
+      display: inline-block;
+      outline: none;
+      color: #000;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1.2px;
+      font-weight: 600;      
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 5px;
+      border: none;
+      padding: 5px;
+      transition: ease .5s;
+}
+
+nav ul li a:hover, nav ul li a .active,
+nav ul li button:hover {
       background-color: #fff;
+      cursor: pointer;
 }
 
 nav .icon, .icon {
@@ -91,6 +109,10 @@ main {
       background-color: rgba(255,255,255,0.4);
       border: 2px solid #555;
       border-radius: 15px;
+}
+
+main h1, main p{
+      text-align: center;
 }
 
 .customers, .customers th, .customers td,
@@ -161,6 +183,17 @@ main {
       }
 
       .nav-wrapper ul li a {
+            padding: 10px 24px;
+            opacity: 0;
+            color: #000;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            transform: translateX(-20px);
+            transition: all 0.2s ease;
+      }
+
+      .nav-wrapper ul li button {
             padding: 10px 24px;
             opacity: 0;
             color: #000;

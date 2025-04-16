@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.db.models import ProtectedError
 from django.shortcuts import render, loader,  redirect
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from .decorators import superuser_required, custom_permission_required
 
 from .forms import CustomerForm, CustomerAddForm, CustomerAddForm2, ProductForm, ProductForm2, ProductAddForm2
 from .models import Customer, Product
@@ -174,6 +176,19 @@ def add_product(request):
     context = {"form":ProductAddForm2()}
     return render(request, "shopping/product_add.html", context)
 
+def is_superuser(user):
+    print(user)
+    print(user.is_superuser)
+    from django.contrib.auth.models import Permission
+    permissions = Permission.objects.filter(user=user)
+    print(permissions)
+    return user.is_superuser
+
+# @login_required
+# @user_passes_test(is_superuser)
+# @permission_required('shopping.product_update', raise_exception=True)
+# @superuser_required
+@custom_permission_required('shopping.product_update', raise_exception=True)
 def update_product(request, product_id):
     # print(request)
     # print('GET', request.GET)

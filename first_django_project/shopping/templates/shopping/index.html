@@ -14,7 +14,16 @@
       {% include "shopping/header.html" %}
 
         <main>
-            <h1>Welcome to shopping page!</h1>
+            {% if user.is_authenticated %}
+                <h1>Welcome to shopping page, {{ user.username }}!</h1>
+                {% comment %} <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form> {% endcomment %}
+            {% else %}
+                <h1>Welcome to shopping page!</h1>
+                <p>Do you have an account? <a href="{% url 'login' %}">Login</a></p>
+            {% endif %}
         </main>  
 
         <script src="" async defer></script>
