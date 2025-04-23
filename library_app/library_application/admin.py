@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from .filters import PublishedYearFilter
 from .models import Book, Author
 
 # Register your models here.
@@ -14,10 +15,10 @@ class AuthorInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     list_display = ["title", "published_year"]
-    list_filter = ["published_year"]
     ordering = ["title", "published_year"]
-    filter_horizontal = ["author",]
+    filter_horizontal = ["author"]
     inlines = [AuthorInline]
+    list_filter = [PublishedYearFilter]
     
 
 class AuthorAdmin(admin.ModelAdmin):
