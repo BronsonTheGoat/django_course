@@ -20,6 +20,7 @@ class Book(models.Model):
     published_year = models.IntegerField()
     pages = models.IntegerField()    
     cover_image = models.ImageField(upload_to='covers/', blank=True, null=True)
+    available = models.BooleanField()
     
     def __str__(self):
         authors = ", ".join([str(author) for author in self.author.all()])
