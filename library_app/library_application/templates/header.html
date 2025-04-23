@@ -35,6 +35,14 @@
                         <li class="{% if request.path == '/library_application/authors' %}active{% endif %}">
                             <a href="{% url 'author_list' %}"><i class="fa-solid fa-feather"></i> Authors</a>
                         </li>
+                        {% if user.is_authenticated %}
+                            <li>
+                            <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                            </form>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>

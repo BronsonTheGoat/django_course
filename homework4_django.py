@@ -4,8 +4,10 @@
     b) Adj hozzá egy születési dátum filtert a szerzők adminhoz rangefilter segítségével!
 
 2) Valósítsd meg a be- és kijelentkezési lehetőséget az oldalon!
+
 3) Új könyv hozzáadására ne legyen minden felhasználónak lehetősége, csak akinél külön beállítjuk
 ezt a jogosultságot!
+
 4) Kölcsönzés:
     a) Adj hozzá egy mezőt a könyv modellhez, amiben azt tárolod, hogy a könyv jelenleg elérhető-e
     a könyvtárban, vagy éppen kikölcsönözték!

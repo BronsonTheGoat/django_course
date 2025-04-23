@@ -4,7 +4,16 @@
 
         <main>
             <div class="main-content">
+                {% if user.is_authenticated %}
+                <h1>Welcome to the library, {{ user.username }}!</h1>
+                {% comment %} <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form> {% endcomment %}
+            {% else %}
                 <h1>Welcome to the library app!</h1>
+                <p>Do you have an account? <a href="{% url 'login' %}">Login</a></p>
+            {% endif %}
                 <img class="index-img" src={% static "img/book-pages-reading-mood.jpg" %} alt="opened-book">
             </div>
         </main>  
