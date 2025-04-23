@@ -9,14 +9,14 @@
 
                 <table class="books">
                     <tr>
-                        <td>ISBN:</td><td> {{ book.isbn }}</td>
+                        <td>ISBN:</td><td  colspan=2> {{ book.isbn }}</td>
                     </tr>
                     <tr>
-                        <td>Tile:</td><td> {{ book.title }} </td>
+                        <td>Tile:</td><td  colspan=2> {{ book.title }} </td>
                     </tr>
                     <tr>
                         <td>Author:</td>
-                        <td> 
+                        <td  colspan=2> 
                             {% if book.author %}
                                 {% for author in book.author.all %}
                                     {{ author.name }} 
@@ -27,16 +27,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Published:</td><td> {{ book.published_year }} </td>
+                        <td>Published:</td><td  colspan=2> {{ book.published_year }} </td>
                     </tr>
                     <tr>
-                        <td>Pages:</td><td> {{ book.pages }} </td>
+                        <td>Pages:</td><td  colspan=2> {{ book.pages }} </td>
                     </tr>
                     <tr>
-                        <td colspan=2>Cover image</td>
+                        <td colspan=3>Cover image</td>
                     </tr>
                     <tr>
-                        <td colspan=2>           
+                        <td colspan=3>           
                             {% if book.cover_image %}
                                 <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
                             {% else %}
@@ -45,11 +45,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Edit</td><td>Delete</td>
+                        <td>Edit</td>
+                        {% if book.available %}
+                        <td>Borrow</td>
+                        {% else %}
+                        <td>Return</td>
+                        {% endif %}
+                        <td>Delete</td>
                     </tr>
                     <tr>
                         <td>
                             <a href="{% url 'book_update' book_id=book.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
+                        <td>
+                            <a href="">
+                                {% if book.available %}
+                                <span class="fa-stack">
+                                    <i class="fa-solid fa-hand-holding fa-stack-2x"></i>
+                                <i class="fa-solid fa-book fa-stack-1x"></i>
+                              </span>
+                              {% else %}
+                              <i class="fa-solid fa-arrow-rotate-left"></i>
+                              {% endif %}
+                            </a>
                         </td>
                         <td>
                             <a href=""><i class="fa-solid fa-trash"></i></a>
