@@ -10,11 +10,11 @@
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form> {% endcomment %}
-            {% else %}
-                <h1>Welcome to the library app!</h1>
-                <p>Do you have an account? <a href="{% url 'login' %}">Login</a></p>
-            {% endif %}
-                <img class="index-img" src={% static "img/book-pages-reading-mood.jpg" %} alt="opened-book">
+                {% else %}
+                    <h1>Welcome to the library app!</h1>
+                    <p>Do you have an account? <a href="{% url 'login' %}">Login</a></p>
+                {% endif %}
+                    <img class="index-img" src={% static "img/book-pages-reading-mood.jpg" %} alt="opened-book">
             </div>
         </main>  
 

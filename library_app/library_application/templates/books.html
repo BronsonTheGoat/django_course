@@ -11,9 +11,11 @@
                 </table>
                     <input type="submit" value="Search">
                 </form>
+                {% if user.is_authenticated %}
                 <div>
                     <a href="{% url 'book_add' %}"><button>Add book</button></a>
                 </div>
+                {% endif %}
                 <br>
                 <hr>
 

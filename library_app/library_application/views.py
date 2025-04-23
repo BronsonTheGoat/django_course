@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, loader, redirect
+from django.contrib.auth.decorators import permission_required
 
 from .forms import BookForm, BookAddForm, AuthorForm
 from .models import Book, Author
@@ -61,6 +62,7 @@ def get_author_details(request, author_id):
     context = {'author': author}
     return render(request, 'author_details.html', context)
 
+@permission_required('book_add', raise_exception=True)
 def add_book(request):
     form = BookAddForm(request.POST, request.FILES)
     if form.is_valid():
