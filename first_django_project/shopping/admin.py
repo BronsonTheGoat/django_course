@@ -27,6 +27,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = [AgeRangeFilter]
     ordering = ['id']
     inlines = [AddressInline,  CustomerAddressInline]
+    raw_id_fields = ["user"]
     
     # readonly_fields = ['age']
     fieldsets = (
@@ -37,7 +38,7 @@ class CustomerAdmin(admin.ModelAdmin):
             'fields': ('email', 'phone_number')
         }),
         ('Other', {
-            'fields': ('age',)
+            'fields': ('age', 'user')
         })
     )
 

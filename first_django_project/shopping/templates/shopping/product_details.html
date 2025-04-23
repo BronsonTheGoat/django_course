@@ -25,15 +25,29 @@
                     <th>Expire:</th>
                     <th>Discounted:</th>
                     <th>Edit:</th>                    
-                    <th>Delete:</th>                    
+                    <th>Delete:</th>
+                    <th>Purchase:</th>                    
                 </tr>
                 <tr>
                     <td> {{ product.price }}</td>
                     <td> {{ product.storage_quantity }} </td>
                     <td> {{ product.expiry_dte }} </td>
                     <td> {% if product.is_discounted %} Yes {% else %} No {% endif %} </td>
-                    <td><a href="{% url 'product_update' product_id=product.id %}"><img class="icon" src={% static "images/edit.png" %} alt="edit"></a></td>
-                    <td><a href="{% url 'product_delete' product_id=product.id %}"><img class="icon" src={% static "images/delete.png" %} alt="delete"></a></td>
+                    <td><a href="{% url 'product_update' product_id=product.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="{% url 'product_delete' product_id=product.id %}"><i class="fa-solid fa-trash"></i></a></td>
+                    <td>
+                        {% if product.storage_quantity %}
+                            {% if user.customer %}                        
+                                <form action="{% url 'product_buy' product.id %}" method="post">
+                                {% csrf_token %}
+                                {{ form.quantity }}
+                                <button type="submit" class="menu-button"><i class="fa-solid fa-money-bill"></i> Purchase</button>
+                                </form>
+                            {% else %}
+                                <p>No customer belongs to user.</p>
+                            {% endif %}
+                        {% endif %}
+                    </td>
                 </tr>
             </table>            
             {% if product.product_image %}

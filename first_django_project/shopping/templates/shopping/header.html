@@ -12,17 +12,21 @@
           </div>
           <div class="nav-wrapper">
                 <ul>
-                      <li><a href="{% url 'index' %}" class="menu-button"><i class="fa-solid fa-house"></i> Home</a></li>
-                      <li><a href="{% url 'customer_list' %}" class="menu-button"><i class="fa-solid fa-users"></i> Customers</a></li>
-                      <li><a href="{% url 'product_list' %}" class="menu-button"><i class="fa-solid fa-box"></i> Products</a></li>
-                      {% if user.is_authenticated %}
-                        <li>
-                        <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                        </form>
-                        </li>
-                      {% endif %}
+                        <li><a href="{% url 'index' %}" class="menu-button"><i class="fa-solid fa-house"></i> Home</a></li>
+                        <li><a href="{% url 'customer_list' %}" class="menu-button"><i class="fa-solid fa-users"></i> Customers</a></li>
+                        <li><a href="{% url 'product_list' %}" class="menu-button"><i class="fa-solid fa-box"></i> Products</a></li>
+                        {% if user.is_authenticated %}
+                              <li>
+                              <form action="{% url 'logout' %}" method="post">
+                              {% csrf_token %}
+                              <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                              </form>
+                              </li>
+                        {% else %}
+                              <li>
+                              <a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                              </li>
+                        {% endif %}
                 </ul>
           </div>
     </nav>

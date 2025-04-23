@@ -1,5 +1,7 @@
 from django import forms
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from .models import Product, Customer
 
 class CustomerForm(forms.Form):
@@ -36,3 +38,45 @@ class ProductAddForm2(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+        
+class PurchaseItemForm(forms.Form):
+    quantity = forms.IntegerField(min_value=1)
+    
+class CustomUserCreationForm(UserCreationForm):
+    username = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Username'})
+    )
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={'placeholder': 'Email'})
+    )
+    age = forms.IntegerField(required=True, validators=[MinValueValidator(18), MaxValueValidator(100)])
+    phone_number = forms.CharField(required=False)
+
+    class Meta:
+        model = User
+        fields = ("username", "email", "password1", "password2", "first_name", "last_name")
+        # widgets = {
+        #     'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+        #     'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
+        # }
+        
+    def save(self, commit=True):
+        user = super().save(commit=False)
+
+        if commit:
+            user.save()
+
+        customer = Customer(
+            user=user,
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
+            email=self.cleaned_data['email'],
+            age=self.cleaned_data['age'],
+            phone_number=self.cleaned_data.get('phone_number', None)
+        )
+        if commit:
+            customer.save()
+
+        return user

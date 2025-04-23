@@ -1,11 +1,14 @@
 from django.http import HttpResponse
 from django.db.models import ProtectedError
-from django.shortcuts import render, loader,  redirect
+from django.shortcuts import render, loader, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from .decorators import superuser_required, custom_permission_required
+import datetime
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 
-from .forms import CustomerForm, CustomerAddForm, CustomerAddForm2, ProductForm, ProductForm2, ProductAddForm2
-from .models import Customer, Product
+from .forms import CustomerForm, CustomerAddForm2, ProductForm2, ProductAddForm2, PurchaseItemForm, CustomUserCreationForm
+from .models import Customer, Product, Purchase, PurchaseItem
 
 # Create your views here.
 
@@ -132,7 +135,7 @@ def get_product_details(request, product_id):
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
         return HttpResponse("No product found!", status=404)
-    context = {'product': product}
+    context = {'product': product, 'form': PurchaseItemForm}
     return render(request, 'shopping/product_details.html', context)
 
 def get_customer_details(request, customer_id):
@@ -261,4 +264,58 @@ def delete_product(request, product_id):
         }
         # return render(request, 'shopping/product_details.html', context)
         return render(request, 'shopping/product_delete_failed.html', context)
-        # return HttpResponse('This product cannot be deleted')ű
+        # return HttpResponse('This product cannot be deleted')
+        
+def buy_product(request, product_id):
+    if hasattr(request.user, 'customer') and request.user.customer:
+        customer = request.user.customer
+        print(customer)
+    else:
+        return HttpResponse('Not allowed', status=403)
+    
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+    
+    # customer = get_object_or_404(Customer, user=request.user)
+    # product = get_object_or_404(Product, id=product.id)
+
+    if request.POST:
+        form = PurchaseItemForm(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            # print(form.cleaned_data)
+            quantity = form.cleaned_data.get("quantity", 1)
+            
+            if product.storage_quantity >= quantity > 0:
+                product.storage_quantity -= quantity
+                product.save()
+                
+                purchase = Purchase.objects.create(purchase_date=datetime.date.today(), customer=customer)
+                PurchaseItem.objects.create(purchase=purchase, product=product, quantity=quantity)
+    
+        return redirect('product_details', product_id=product.id)
+    
+    
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            user = form.save()
+            # Customer.objects.create(
+            #     first_name = form.cleaned_data.get("first_name"),
+            #     last_name = form.cleaned_data.get("last_name"),
+            #     email = form.cleaned_data.get("email"),
+            #     age = form.cleaned_data.get("age"),
+            #     user = user
+            # )
+            login(request, user)
+            return redirect('/')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
