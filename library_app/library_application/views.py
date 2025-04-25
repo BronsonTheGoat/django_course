@@ -32,7 +32,11 @@ def get_book_details(request, book_id):
         book = Book.objects.get(id=book_id)
     except Book.DoesNotExist:
         return HttpResponse("No book found!", status=404)
-    context = {'book': book}
+    borrows = Borrow.objects.filter(book=book).order_by('-borrow_date')
+    context = {
+        'book': book,
+        'borrows': borrows,
+        }
     return render(request, 'book_details.html', context)
 
 def get_authors(request):

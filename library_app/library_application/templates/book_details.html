@@ -83,6 +83,28 @@
                             <a href=""><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
+                    {% if request.user.is_staff %}
+                        <tr>
+                            <td colspan=3>
+                                <h3>Borrow history</h3>
+                                <ul>
+                                    {% for borrow in book.borrow_set.all %}
+                                        <li>
+                                            {{ borrow.user.username }} – 
+                                            {{ borrow.borrow_date }} → 
+                                            {% if borrow.return_date %}
+                                                {{ borrow.return_date }}
+                                            {% else %}
+                                                still borrowed
+                                            {% endif %}
+                                        </li>
+                                    {% empty %}
+                                        <li>There's no history available.</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endif %}
                 </table>
             </div>
         </main>
