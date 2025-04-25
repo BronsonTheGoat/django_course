@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, loader, redirect
 from django.contrib.auth.decorators import permission_required
-
+import datetime
 from .forms import BookForm, BookAddForm, AuthorForm
-from .models import Book, Author
+from .models import Book, Author, Borrow
 
 # Create your views here.
 
@@ -94,3 +94,49 @@ def update_book(request, book_id):
         'book': book
     }
     return render(request, 'book_update.html', context)
+
+def borrow_book(request, book_id):
+    if request.user.is_authenticated:
+        user = request.user
+        print(user)
+    else:
+        return HttpResponse('Not allowed', status=403)
+    
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return HttpResponse('Book not found', status=404)
+
+    if request.method == "POST":
+        if book.available == True:
+            book.available = False
+            book.save()
+            
+            Borrow.objects.create(borrow_date=datetime.date.today(), book=book, user=user)
+    
+        return redirect('book_details', book_id=book.id)
+    
+def return_book(request, book_id):
+    if not request.user.is_authenticated:
+        return HttpResponse('Not allowed', status=403)
+
+    try:
+        book = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return HttpResponse('Book not found', status=404)
+
+    borrow = Borrow.objects.filter(book=book, user=request.user, return_date__isnull=True).last()
+
+    if not borrow:
+        return HttpResponse("Nem található aktív kölcsönzés.", status=404)
+
+    if request.method == 'POST':
+        book.available = True
+        book.save()
+
+        borrow.return_date = datetime.date.today()
+        borrow.save()
+
+        return redirect('book_details', book_id=book.id)
+
+    return HttpResponse("Invalid request", status=400)

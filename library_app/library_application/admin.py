@@ -2,7 +2,7 @@ from django.contrib import admin
 from rangefilter.filters import DateRangeFilter
 from .filters import PublishedYearFilter
 from django_object_actions import DjangoObjectActions
-from .models import Book, Author
+from .models import Book, Author, Borrow
 
 # Register your models here.
 
@@ -75,6 +75,11 @@ class AuthorAdmin(DjangoObjectActions, admin.ModelAdmin):
     list_filter = ["nationality", ("birth_date", DateRangeFilter)]
     ordering = ["name"]
     inlines = [BookInline]
+    
+
+@admin.register(Borrow)    
+class BorrowAdmin(admin.ModelAdmin):
+    list_display = ["id", "borrow_date", "return_date", "book", "user"]
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)

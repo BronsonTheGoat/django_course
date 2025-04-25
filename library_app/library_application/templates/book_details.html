@@ -60,12 +60,22 @@
                         <td>
                             <a href="">
                                 {% if book.available %}
-                                <span class="fa-stack">
-                                    <i class="fa-solid fa-hand-holding fa-stack-2x"></i>
-                                <i class="fa-solid fa-book fa-stack-1x"></i>
-                              </span>
+                                <form action="{% url 'borrow_book' book.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="menu-button">
+                                        <span class="fa-stack">
+                                            <i class="fa-solid fa-hand-holding fa-stack-2x"></i>
+                                        <i class="fa-solid fa-book fa-stack-1x"></i>
+                                    </span>
+                                    </button>
+                                </form>
                               {% else %}
-                              <i class="fa-solid fa-arrow-rotate-left"></i>
+                                <form action="{% url 'return_book' book.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="menu-button">
+                                        <i class="fa-solid fa-arrow-rotate-left"></i>
+                                    </button>
+                                </form>
                               {% endif %}
                             </a>
                         </td>

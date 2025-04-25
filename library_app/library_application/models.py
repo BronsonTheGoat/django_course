@@ -29,7 +29,7 @@ class Book(models.Model):
     
 class Borrow(models.Model):
     borrow_date = models.DateField()
-    return_date = models.DateField()
+    return_date = models.DateField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='borrows')
     book = models.ForeignKey(Book, on_delete=models.PROTECT)
 
