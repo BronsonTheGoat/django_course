@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -25,3 +26,15 @@ class Book(models.Model):
     def __str__(self):
         authors = ", ".join([str(author) for author in self.author.all()])
         return f"{self.title} - {authors}"
+    
+class Borrow(models.Model):
+    borrow_date = models.DateField()
+    return_date = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='borrows')
+    book = models.ForeignKey(Book, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'{self.user} ({self.borrow_date})'
+    
+    class Meta:
+        ordering = ["borrow_date"]
