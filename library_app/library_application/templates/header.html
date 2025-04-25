@@ -36,12 +36,20 @@
                             <a href="{% url 'author_list' %}"><i class="fa-solid fa-feather"></i> Authors</a>
                         </li>
                         {% if user.is_authenticated %}
-                            <li>
-                            <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-                            </form>
-                            </li>
+                            <ul>
+                            <div class="dropdown">
+                                <button class="dropbtn"><i class="fa-solid fa-user"></i></button>
+                                <div class="dropdown-content">
+                                    <li>
+                                        <a href="{% url 'profile' %}"><i class="fa-solid fa-address-card"></i> Profile</a>
+                                    </li>
+                                    <form action="{% url 'logout' %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </ul>
                         {% endif %}
                     </ul>
                 </div>

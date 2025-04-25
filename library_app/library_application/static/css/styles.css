@@ -72,7 +72,7 @@ nav ul li:last-child {
       margin-right: 24px;
 }
 
-nav ul li a {
+nav ul li a, .dropbtn, .menu-button {
       display: inline-block;
       outline: none;
       color: #000;
@@ -80,13 +80,65 @@ nav ul li a {
       text-decoration: none;
       padding: 5px;
       border-radius: 5px;
+      border: none;
       font-size: 14px;
       letter-spacing: 1.2px;
       font-weight: 600;
       transition: ease-in .3s;
 }
 
-nav ul li a:hover, nav ul li.active a{
+.menu-button {
+      padding: 0;
+      width: 160px;
+}
+
+.dropbtn {
+      width: 60px;
+}
+
+nav ul li a:hover, nav ul li.active a, .menu-button:hover{
+      background-color: #000;
+      color: #fff;
+}
+  
+.dropdown {
+      position: relative;
+      display: inline-block;
+}
+
+.dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f1f1f1;
+      width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+}
+
+.dropdow-content li {
+      margin: 0;
+      width: 160px;
+}
+
+.dropdown-content li a {
+      width: 160px;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+}
+
+.dropdown-content a:hover {
+      background-color: #000;
+      color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+      display: block;
+}
+
+.dropdown:hover .dropbtn {
       background-color: #000;
       color: #fff;
 }
@@ -103,6 +155,10 @@ main{
       background-color: rgba(255,255,255,0.4);
       width: 50%;
       text-align: center;
+}
+
+.main-content .profile {
+      text-align: left;
 }
 
 main h1{

@@ -132,7 +132,7 @@ def return_book(request, book_id):
     borrow = Borrow.objects.filter(book=book, user=request.user, return_date__isnull=True).last()
 
     if not borrow:
-        return HttpResponse("Nem található aktív kölcsönzés.", status=404)
+        return HttpResponse("No active borrowing found.", status=404)
 
     if request.method == 'POST':
         book.available = True
@@ -144,3 +144,16 @@ def return_book(request, book_id):
         return redirect('book_details', book_id=book.id)
 
     return HttpResponse("Invalid request", status=400)
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return HttpResponse('Not allowed', status=403)
+    else:
+        user = request.user
+        borrow = Borrow.objects.filter(user=user, return_date__isnull=True)
+        
+    context = {
+        'user': user,
+        "borrow": borrow
+    }
+    return render(request, 'profile.html', context)

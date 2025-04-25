@@ -1,0 +1,34 @@
+{% load static %}
+
+{% include "header.html" %}
+
+
+        <main>
+            <div class="main-content">
+                <h1>My profile</h1>
+                <ul class="profile">
+                    <li>First name: {{ user.first_name }}</li>
+                    <li>Last name: {{ user.last_name }}</li>
+                    <li>Username: {{ user.username }}</li>
+                    <li>Email: {{ user.email }}</li>
+                    {% if borrow.all %}
+                        <li>Borrows:</li>
+                        <ul>
+                        {% for item in borrow.all %}
+                            <li>
+                                {{ item.book.title }} – 
+                                {{ item.borrow_date }}
+                            </li>
+                        {% empty %}
+                            No borrowed books.
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </ul>
+            </div>
+        </main>
+
+        {% include "footer.html" %}
+        <script></script>
+    </body>
+</html>
