@@ -5,7 +5,7 @@ from rangefilter.filters import DateRangeFilter, DateRangeFilterBuilder, DateTim
 from django_object_actions import DjangoObjectActions
 # from .filters import PriceRangeFilter, AgeRangeFilter, AgeRangeFilter2
 from .filters2 import AgeRangeFilter, PriceRangeFilter
-from .models import Customer, Product, HomeAddress, CustomerAddress, Purchase, PurchaseItem
+from .models import Customer, Product, HomeAddress, CustomerAddress, Purchase, PurchaseItem, ShopingCart, CartItem
 
 # Register your models here.
 
@@ -19,6 +19,10 @@ class CustomerAddressInline(admin.StackedInline):
     
 class PurchaseInline(admin.TabularInline):
     model = PurchaseItem
+    extra = 0
+    
+class CartInline(admin.TabularInline):
+    model = CartItem
     extra = 0
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -152,6 +156,10 @@ class ProductAdmin(DjangoObjectActions, admin.ModelAdmin):
     
 class PurchaseAdmin(admin.ModelAdmin):
     inlines = [PurchaseInline]
+    
+
+class CartAdmin(admin.ModelAdmin):
+    inlines = [CartInline]
 
 
 admin.site.register(Customer, CustomerAdmin)
@@ -160,3 +168,5 @@ admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Purchase, PurchaseAdmin)
 admin.site.register(PurchaseItem)
+admin.site.register(ShopingCart, CartAdmin)
+admin.site.register(CartItem)

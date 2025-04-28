@@ -8,7 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
 from .forms import CustomerForm, CustomerAddForm2, ProductForm2, ProductAddForm2, PurchaseItemForm, CustomUserCreationForm
-from .models import Customer, Product, Purchase, PurchaseItem
+from .models import Customer, Product, Purchase, PurchaseItem, ShopingCart, CartItem
 
 # Create your views here.
 
@@ -269,7 +269,6 @@ def delete_product(request, product_id):
 def buy_product(request, product_id):
     if hasattr(request.user, 'customer') and request.user.customer:
         customer = request.user.customer
-        print(customer)
     else:
         return HttpResponse('Not allowed', status=403)
     
@@ -303,9 +302,7 @@ def register(request):
         return redirect('index')
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
-        print(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
             user = form.save()
             # Customer.objects.create(
             #     first_name = form.cleaned_data.get("first_name"),
@@ -319,3 +316,90 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+# def cart_details(request):
+#     # customer = get_object_or_404(Customer, user=request.user)
+#     if hasattr(request.user, 'customer') and request.user.customer:
+#         customer = request.user.customer
+#         print(customer)
+#     else:
+#         return HttpResponse('Not allowed', status=403)
+
+#     # try:
+#     #     cart = Cart.objects.get(customer=customer)
+#     # except Cart.DoesNotExist:
+#     #     return HttpResponse('No cart', status=404)
+
+#     cart, created = Cart.objects.get_or_create(customer=customer)
+#     return render(request, 'shopping/cart_details.html', {'cart': cart})
+
+def cart_details(request):
+    if hasattr(request.user, 'customer') and request.user.customer:
+        customer = request.user.customer
+    else:
+        return HttpResponse('Not allowed', status=403)
+    
+    # try:
+    #     cart = ShopingCart.objects.get(id=cart_id)
+    # except ShopingCart.DoesNotExist:
+    #     return HttpResponse("No cart found!", status=404)
+    # context = {'cart': cart}
+    # return render(request, 'shopping/cart_details.html', context)
+
+    cart, created = ShopingCart.objects.get_or_create(customer=customer)
+    return render(request, 'shopping/cart_details.html', {'cart': cart})
+
+
+def add_product_to_cart(request, product_id):
+    if hasattr(request.user, 'customer') and request.user.customer:
+        customer = request.user.customer
+    else:
+        return HttpResponse('Not allowed', status=403)
+    
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+    
+    # customer = get_object_or_404(Customer, user=request.user)
+    # product = get_object_or_404(Product, id=product.id)
+
+    if request.POST:
+        form = PurchaseItemForm(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            # print(form.cleaned_data)
+            quantity = form.cleaned_data.get("quantity", 1)
+            
+            if product.storage_quantity >= quantity > 0:
+                product.storage_quantity -= quantity
+                product.save()
+                
+                shopping_cart, created = ShopingCart.objects.get_or_create(customer=customer)
+                cart_item, created = CartItem.objects.get_or_create(shopping_cart=shopping_cart, product=product)
+                if created:
+                    cart_item.quantity = quantity
+                else:
+                    cart_item.quantity += quantity
+                    
+                cart_item.save()
+    
+        return redirect('product_details', product_id=product.id)
+    
+    
+def remove_product_from_cart(request, cart_item_id):
+    try:
+        cart_item = CartItem.objects.get(id=cart_item_id)
+    except CartItem.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+    print(cart_item.product.id)
+    try:
+        product = Product.objects.get(id=cart_item.product.id)
+    except Product.DoesNotExist:
+        return HttpResponse('Product not found', status=404)
+    
+    product.storage_quantity += cart_item.quantity
+    product.save()
+    cart_item.delete()
+    return redirect('cart_details')

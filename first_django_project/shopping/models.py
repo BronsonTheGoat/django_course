@@ -15,6 +15,10 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
+    
 # invoice address and delivery address
 class HomeAddress(models.Model):
     city = models.CharField(max_length=50)
@@ -88,3 +92,43 @@ class PurchaseItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} x {self.product.product_name}'
+    
+
+# Cart
+# class Cart(models.Model):
+#     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='cart')
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+
+# class CartItem(models.Model):
+#     quantity = models.PositiveIntegerField(default=1)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+
+class ShopingCart(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name='cart')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.customer.name}'
+    
+    @property
+    def total_price(self):
+        return sum([item.total_price for item in self.items.all()])
+    
+    class Meta:
+        ordering = ["created_at"]
+        
+        
+class CartItem(models.Model):
+    quantity = models.PositiveIntegerField(default=1)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    shopping_cart = models.ForeignKey(ShopingCart, on_delete=models.CASCADE, related_name='items')
+
+    def __str__(self):
+        return f'{self.quantity} x {self.product.product_name}'
+    
+    @property
+    def total_price(self):
+        return self.quantity * self.product.price
