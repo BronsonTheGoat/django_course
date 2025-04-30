@@ -6,9 +6,13 @@ from .decorators import superuser_required, custom_permission_required
 import datetime
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 from .forms import CustomerForm, CustomerAddForm2, ProductForm2, ProductAddForm2, PurchaseItemForm, CustomUserCreationForm
 from .models import Customer, Product, Purchase, PurchaseItem, ShopingCart, CartItem
+
+from django.utils.translation import gettext as _
+from django.utils import translation
 
 # Create your views here.
 
@@ -95,6 +99,19 @@ def index(request):
 #     }
 
 #     return render(request, 'shopping/customers2.html', context)
+
+def page1(request):
+    translation.activate("hu")
+    return HttpResponse(_("Welcome!"))
+
+def page2(request):
+    translation.activate("hu")
+    # return HttpResponse(_("Hi my friend!"))
+    # context = {
+    #     "title": _("Welcome on the page!"),
+    # }
+    return render(request, "shopping/page2.html")
+
 
 def get_customers(request):
     customers = Customer.objects.all()
@@ -347,8 +364,11 @@ def cart_details(request):
     # context = {'cart': cart}
     # return render(request, 'shopping/cart_details.html', context)
 
+
     cart, created = ShopingCart.objects.get_or_create(customer=customer)
-    return render(request, 'shopping/cart_details.html', {'cart': cart})
+    context = {'cart': cart,
+               'form':PurchaseItemForm}
+    return render(request, 'shopping/cart_details.html', context)
 
 
 def add_product_to_cart(request, product_id):
@@ -403,3 +423,147 @@ def remove_product_from_cart(request, cart_item_id):
     product.save()
     cart_item.delete()
     return redirect('cart_details')
+
+def update_product_in_cart(request, cart_item_id):
+    # print(cart_item_id)
+    # print("update")
+    # try:
+    #     cart_item = CartItem.objects.get(id=cart_item_id)
+    # except CartItem.DoesNotExist:
+    #     return HttpResponse('Product not found', status=404)
+    
+    cart_item = get_object_or_404(CartItem, id=cart_item.id, cart__customer__user=request.user)
+    
+    if request.POST:
+        form = PurchaseItemForm(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            # print(form.cleaned_data)
+            quantity = form.cleaned_data.get("quantity", 1)
+            
+            if cart_item.product.storage_quantity >= quantity > 0:
+                cart_item.quantity += quantity
+                cart_item.save()
+                cart_item.product.storage_quantity -= quantity
+                cart_item.product.save()
+                messages.success(request, f"Update was successful.")
+    return redirect('cart_details')
+
+def create_purchase(request):
+    if hasattr(request.user, 'customer') and request.user.customer:
+        customer = request.user.customer
+    else:
+        return HttpResponse('Not allowed', status=403)
+
+    cart = ShopingCart.objects.get(customer=customer)
+    
+    purchase = Purchase.objects.create(purchase_date=datetime.date.today(), customer=customer)
+    for item in cart.items.all():
+        PurchaseItem.objects.create(purchase=purchase, product=item.product, quantity=item.quantity)
+    cart.delete()  #.items.all().delete()
+    # return redirect('cart_details')
+    context = {"purchase":purchase}
+    return render(request, 'shopping/purchase_successful.html', context)
+
+# path('cart/checkout/', views.checkout_cart, name='checkout_cart'),
+# path('cart/checkout/success', views.checkout_cart_success, name='checkout_cart_success'),
+
+# def checkout_cart(request):
+#     customer = get_object_or_404(Customer, user=request.user)
+#     cart = get_object_or_404(Cart, customer=customer)
+
+#     purchase = Purchase.objects.create(purchase_date=datetime.date.today(), customer=customer)
+#     for item in cart.items.all():
+#         PurchaseItem.objects.create(purchase=purchase, product=item.product, quantity=item.quantity)
+#         item.product.storage_quantity -= item.quantity
+#         item.product.save()
+
+#     cart.items.all().delete()
+
+#     return redirect('checkout_cart_success')
+
+
+# def checkout_cart_success(request):
+#     return render(request, 'shopping/checkout_success.html')
+
+# path('cart/checkout/', views.checkout_cart, name='checkout_cart'),
+# path('cart/checkout/success', views.checkout_cart_success, name='checkout_cart_success'),
+
+# def checkout_cart(request):
+#     customer = get_object_or_404(Customer, user=request.user)
+#     cart = get_object_or_404(Cart, customer=customer)
+
+#     purchase = Purchase.objects.create(purchase_date=datetime.date.today(), customer=customer)
+#     for item in cart.items.all():
+#         PurchaseItem.objects.create(purchase=purchase, product=item.product, quantity=item.quantity)
+#         item.product.storage_quantity -= item.quantity
+#         item.product.save()
+
+#     cart.items.all().delete()
+
+#     request.session['last_purchase_id'] = purchase.id
+
+#     return redirect('checkout_cart_success')
+
+
+# def checkout_cart_success(request):
+#     purchase_id = request.session.pop('last_purchase_id', None)
+#     purchase = None
+#     items = []
+
+#     if purchase_id:
+#         purchase = get_object_or_404(Purchase, id=purchase_id)
+#         items = purchase.items.select_related('product')
+
+#     return render(request, 'shopping/checkout_success.html', {
+#         'purchase': purchase,
+#         'items': items
+#     })
+
+# path('cart/checkout/', views.checkout_cart, name='checkout_cart'),
+# path('cart/checkout/success/<int:purchase_id>/', views.checkout_cart_success, name='checkout_cart_success'),
+
+# def checkout_cart(request):
+#     customer = get_object_or_404(Customer, user=request.user)
+#     cart = get_object_or_404(Cart, customer=customer)
+
+#     purchase = Purchase.objects.create(purchase_date=datetime.date.today(), customer=customer)
+#     for item in cart.items.all():
+#         PurchaseItem.objects.create(purchase=purchase, product=item.product, quantity=item.quantity)
+#         item.product.storage_quantity -= item.quantity
+#         item.product.save()
+
+#     cart.items.all().delete()
+
+#     return redirect('checkout_cart_success', purchase_id=purchase.id)
+
+
+# def checkout_cart_success(request, purchase_id):
+#     purchase = get_object_or_404(Purchase, id=purchase_id, customer__user=request.user)
+#     items = purchase.items.select_related('product')
+
+#     return render(request, 'shopping/checkout_success.html', {
+#         'purchase': purchase,
+#         'items': items
+#     })
+
+# path('cart/checkout/', views.checkout_cart, name='checkout_cart'),
+
+# def checkout_cart(request):
+#     customer = get_object_or_404(Customer, user=request.user)
+#     cart = get_object_or_404(Cart, customer=customer)
+
+#     purchase = Purchase.objects.create(purchase_date=datetime.date.today(), customer=customer)
+#     for item in cart.items.all():
+#         PurchaseItem.objects.create(purchase=purchase, product=item.product, quantity=item.quantity)
+#         item.product.storage_quantity -= item.quantity
+#         item.product.save()
+
+#     cart.items.all().delete()
+
+#     items = purchase.items.select_related('product')
+
+#     return render(request, 'shopping/checkout_success.html', {
+#         'purchase': purchase,
+#         'items': items
+#     })

@@ -43,7 +43,7 @@
                     <td>{{ cart.updated_at }}</td>
                 </tr>
             </table>
-            <h4>Products in cart</h4>
+            <h4>Products in cart:</h4>
             {% if cart %}
             <table class="product">
                 {% if cart.items.all %}
@@ -58,21 +58,37 @@
                     <tr>
                         <td>{{ item.product.product_name }} </td> 
                         <td>{{ item.product.price }} </td>                 
-                        <td>{{ item.quantity }} </td>
+                        <td>{{ item.quantity }}
+                            <form action="{% url 'update_cart' item.id %}" method="post">
+                                {% csrf_token %}
+                                {% comment %} {{ form.quantity }} {% endcomment %}
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.storage_quantity }}">
+                                <button type="submit" class="menu-button"><i class="fa-solid fa-arrows-rotate"></i> Update </button>
+                            </form>    
+                        </td>
                         <td>{{ item.total_price }} </td>
                         <td><a href="{% url 'remove_from_cart' cart_item_id=item.id %}"><i class="fa-solid fa-trash"></i></a></td>
                     </tr>
+                    {% endfor %}
                     <tr>
                         <th colspan=4>Total:</th>
                         <th>{{ cart.total_price }}</th>
                     </tr>
-                    {% endfor %}
                 {% else %}
                     <p>No product in cart.</p>
                 {% endif %}
             </table>      
             {% else %}
             <p>No product in cart.</p>
+            {% endif %}
+            <form action="{% url 'create_purchase' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="menu-button"><i class="fa-solid fa-money-bill"></i> Buy </button>
+            </form>
+            {% if messages %}
+                    {% for message in messages %}
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                    {% endfor %}
             {% endif %}
         </main>
 

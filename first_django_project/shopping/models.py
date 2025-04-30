@@ -81,6 +81,10 @@ class Purchase(models.Model):
     def __str__(self):
         return f'{self.customer} ({self.purchase_date})'
     
+    @property
+    def total_price(self):
+        return sum(item.total_price for item in self.items.all())
+    
     class Meta:
         ordering = ["purchase_date"]
 
@@ -93,6 +97,9 @@ class PurchaseItem(models.Model):
     def __str__(self):
         return f'{self.quantity} x {self.product.product_name}'
     
+    @property
+    def total_price(self):
+        return self.quantity * self.product.price
 
 # Cart
 # class Cart(models.Model):

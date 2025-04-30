@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Products</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
+    <body>
+        {% include "shopping/header.html" %}
+
+        <main>
+            <h3>Your purchase was succesful. Thank you!</h3>
+            {% if purchase %}
+            <table class="product">
+                {% if purchase.items.all %}
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                    {% for item in purchase.items.all %} 
+                    <tr>
+                        <td>{{ item.product.product_name }} </td> 
+                        <td>{{ item.product.price }} </td>                 
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.total_price }} </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan=3>Total:</th>
+                        <th>{{ purchase.total_price }}</th>
+                    </tr>
+                {% else %}
+                    <p>No products.</p>
+                {% endif %}
+            </table>      
+            {% else %}
+            <p>No products.</p>
+            {% endif %}
+        </main>
+
+        <script src="" async defer></script>
+    </body>
+</html>
