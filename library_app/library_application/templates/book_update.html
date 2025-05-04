@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 
 {% include "header.html" %}
 
 
         <main>
             <div class="main-content">
-                <h1>Update book: {{ book }} </h1>            
+                <h1>{% trans "Update book" %}: {{ book }} </h1>            
                 <form method="POST" enctype="multipart/form-data">
                     <table class="add">
                         {% csrf_token %}
@@ -13,7 +14,7 @@
                     </table>
                     <input type="submit" value="Update">
                 </form>
-                <a href="{% url 'book_details' book_id=book.id %}">Back to details</a>
+                <a href="{% url 'book_details' book_id=book.id %}">{% trans "Back to details" %}</a>
                 <img id="preview" src="" alt="">
             </div>
         </main>

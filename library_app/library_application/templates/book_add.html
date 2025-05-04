@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 
 {% include "header.html" %}
 
 
         <main>
             <div class="main-content">
-                <h1>New book</h1>            
+                <h1>{% trans "New book" %}</h1>            
                 <form method="POST" enctype="multipart/form-data">
                     <table class="add">
                         {% csrf_token %}

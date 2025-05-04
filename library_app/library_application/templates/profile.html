@@ -1,18 +1,19 @@
 {% load static %}
+{% load i18n %}
 
 {% include "header.html" %}
 
 
         <main>
             <div class="main-content">
-                <h1>My profile</h1>
+                <h1>{% trans My profile %}</h1>
                 <ul class="profile">
-                    <li>First name: {{ user.first_name }}</li>
-                    <li>Last name: {{ user.last_name }}</li>
-                    <li>Username: {{ user.username }}</li>
-                    <li>Email: {{ user.email }}</li>
+                    <li>{% trans "First name" %}: {{ user.first_name }}</li>
+                    <li>{% trans "Last name" %}: {{ user.last_name }}</li>
+                    <li>{% trans "Username" %}: {{ user.username }}</li>
+                    <li>{% trans "Email" %}: {{ user.email }}</li>
                     {% if borrow.all %}
-                        <li>Borrows:</li>
+                        <li>{% trans "Borrows" %}:</li>
                         <ul>
                         {% for item in borrow.all %}
                             <li>
@@ -20,7 +21,7 @@
                                 {{ item.borrow_date }}
                             </li>
                         {% empty %}
-                            No borrowed books.
+                            {% trans No borrowed books %}.
                         {% endfor %}
                         </ul>
                     {% endif %}

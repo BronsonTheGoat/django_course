@@ -1,10 +1,11 @@
 {% load static %}
+{% load i18n %}
 
 {% include "header.html" %}
 
         <main>
             <div class="main-content">
-                <h3>Books:</h3>
+                <h3>{% trans "Books" %}:</h3>
                 <form method="get">
                 <table>
                     {{ form.as_table }}
@@ -13,7 +14,7 @@
                 </form>
                 {% if user.is_authenticated %}
                 <div>
-                    <a href="{% url 'book_add' %}"><button>Add book</button></a>
+                    <a href="{% url 'book_add' %}"><button>{% trans "Add book" %}</button></a>
                 </div>
                 {% endif %}
                 <br>
@@ -24,12 +25,12 @@
                     <tr>
                         <th>id</th>
                         <th>ISBN</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Published</th>
-                        <th>Pages</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>{% trans "Title" %}</th>
+                        <th>{% trans "Author" %}</th>
+                        <th>{% trans "Published" %}</th>
+                        <th>{% trans "Pages" %}</th>
+                        <th>{% trans "Edit" %}</th>
+                        <th>{% trans "Delete" %}</th>
                     </tr>
                     {% for book in books %}
                         <tr>
@@ -52,7 +53,7 @@
                 </table>
                 
                 {% else %}
-                <p>No books.</p>
+                <p>{% trans "No books" %}.</p>
                 {% endif %}
             </div>
         </main>

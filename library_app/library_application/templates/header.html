@@ -1,11 +1,12 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Home</title>
+        <title>{% trans "Home" %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -27,13 +28,13 @@
                 <div class="nav-wrapper">
                     <ul>
                         <li class="{% if request.path == '/library_application/' %}active{% endif %}">
-                            <a href="{% url 'index' %}"><i class="fa-solid fa-house-chimney"></i> Home</a>
+                            <a href="{% url 'index' %}"><i class="fa-solid fa-house-chimney"></i> {% trans "Home" %}</a>
                         </li>
                         <li class="{% if request.path == '/library_application/books' %}active{% endif %}">
-                            <a href="{% url 'book_list' %}"><i class="fa-solid fa-book"></i> Books</a>
+                            <a href="{% url 'book_list' %}"><i class="fa-solid fa-book"></i> {% trans "Books" %}</a>
                         </li>
                         <li class="{% if request.path == '/library_application/authors' %}active{% endif %}">
-                            <a href="{% url 'author_list' %}"><i class="fa-solid fa-feather"></i> Authors</a>
+                            <a href="{% url 'author_list' %}"><i class="fa-solid fa-feather"></i> {% trans "Authors" %}</a>
                         </li>
                         {% if user.is_authenticated %}
                             <ul>
@@ -41,11 +42,11 @@
                                 <button class="dropbtn"><i class="fa-solid fa-user"></i></button>
                                 <div class="dropdown-content">
                                     <li>
-                                        <a href="{% url 'profile' %}"><i class="fa-solid fa-address-card"></i> Profile</a>
+                                        <a href="{% url 'profile' %}"><i class="fa-solid fa-address-card"></i> {% trans "Profile" %}</a>
                                     </li>
                                     <form action="{% url 'logout' %}" method="post">
                                         {% csrf_token %}
-                                        <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                                        <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</button>
                                     </form>
                                 </div>
                             </div>

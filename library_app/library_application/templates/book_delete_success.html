@@ -1,15 +1,16 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% trans "Delete - success" %}</title>
 </head>
     <body>
         <main>
             <div class="main-content">
-                <h3>This book was successfully deleted!</h3>
+                <h3>{% trans "This book was successfully deleted" %}!</h3>
 
-                <p>Back to <a href="{% url 'book_list' %}">Books</a><p>
+                <p>{% trans "Back to" %} <a href="{% url 'book_list' %}">{% trans "Books" %}</a><p>
             </div>
         </main>
     {% include "footer.html" %}

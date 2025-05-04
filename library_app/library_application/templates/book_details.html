@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 {% include "header.html" %}
 
@@ -12,10 +13,10 @@
                         <td>ISBN:</td><td  colspan=2> {{ book.isbn }}</td>
                     </tr>
                     <tr>
-                        <td>Tile:</td><td  colspan=2> {{ book.title }} </td>
+                        <td>{% trans "Title" %}:</td><td  colspan=2> {{ book.title }} </td>
                     </tr>
                     <tr>
-                        <td>Author:</td>
+                        <td>{% trans "Author" %}:</td>
                         <td  colspan=2> 
                             {% if book.author %}
                                 {% for author in book.author.all %}
@@ -27,31 +28,31 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Published:</td><td  colspan=2> {{ book.published_year }} </td>
+                        <td>{% trans "Published" %}:</td><td  colspan=2> {{ book.published_year }} </td>
                     </tr>
                     <tr>
-                        <td>Pages:</td><td  colspan=2> {{ book.pages }} </td>
+                        <td>{% trans "Pages" %}:</td><td  colspan=2> {{ book.pages }} </td>
                     </tr>
                     <tr>
-                        <td colspan=3>Cover image</td>
+                        <td colspan=3>{% trans "Cover image" %}</td>
                     </tr>
                     <tr>
                         <td colspan=3>           
                             {% if book.cover_image %}
                                 <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" width=200>
                             {% else %}
-                                <p>No image available</p>
+                                <p>{% trans "No image available" %}</p>
                             {% endif %}
                         </td>
                     </tr>
                     <tr>
-                        <td>Edit</td>
+                        <td>{% trans "Edit" %}</td>
                         {% if book.available %}
-                        <td>Borrow</td>
+                        <td>{% trans "Borrow" %}</td>
                         {% else %}
-                        <td>Return</td>
+                        <td>{% trans "Return" %}</td>
                         {% endif %}
-                        <td>Delete</td>
+                        <td>{% trans "Delete" %}</td>
                     </tr>
                     <tr>
                         <td>
@@ -86,7 +87,7 @@
                     {% if request.user.is_staff %}
                         <tr>
                             <td colspan=3>
-                                <h3>Borrow history</h3>
+                                <h3>{% trans "Borrow history" %}</h3>
                                 <ul>
                                     {% for borrow in book.borrow_set.all %}
                                         <li>
@@ -95,11 +96,11 @@
                                             {% if borrow.return_date %}
                                                 {{ borrow.return_date }}
                                             {% else %}
-                                                still borrowed
+                                                {% trans "still borrowed" %}
                                             {% endif %}
                                         </li>
                                     {% empty %}
-                                        <li>There's no history available.</li>
+                                        <li>{% trans "There's no history available" %}.</li>
                                     {% endfor %}
                                 </ul>
                             </td>

@@ -1,11 +1,12 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% trans "Forbidden page" %}</title>
 </head>
 <body>
-<h1>You are not allowed to view this page.</h1>
-<a href="{% url 'index' %}">Back to home</a>
+<h1>{% trans "You are not allowed to view this page" %}.</h1>
+<a href="{% url 'index' %}">{% trans "Back to home" %}</a>
 </body>
 </html>

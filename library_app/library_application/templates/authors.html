@@ -1,10 +1,11 @@
 {% load static %}
+{% load i18n %}
 
 {% include "header.html" %}
 
         <main>
             <div class="main-content">
-                <h3>Authors:</h3>
+                <h3>{% trans "Authors" %}:</h3>
                 <form method="get">
                 <table>
                     {{ form.as_table }}
@@ -18,12 +19,12 @@
                 <table class="authors">
                     <tr>
                         <th>id</th>
-                        <th>Name</th>
-                        <th>Birth date</th>
-                        <th>Birth place</th>
-                        <th>Nationality</th>
-                        <th>Decease date</th>
-                        <th>Decease place</th>
+                        <th>{% trans "Name" %}</th>
+                        <th>{% trans "Birth date" %}</th>
+                        <th>{% trans "Birth place" %}</th>
+                        <th>{% trans "Nationality" %}</th>
+                        <th>{% trans "Decease date" %}</th>
+                        <th>{% trans "Decease place" %}</th>
                     </tr>
                     {% for author in authors %}
                         <tr>
@@ -51,7 +52,7 @@
                 </table>
                 
                 {% else %}
-                <p>No authors.</p>
+                <p>{% trans "No authors" %}.</p>
                 {% endif %}
             </div>
         </main>

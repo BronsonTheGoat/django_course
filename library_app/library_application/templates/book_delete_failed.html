@@ -1,15 +1,16 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% trans "Delete - fail" %}</title>
 </head>
     <body>
         <main>
             <div class="main-content">
-                <h3>This book cannot be deleted!</h3>
+                <h3>{% trans "This book cannot be deleted" %}!</h3>
 
-                <p>Back to <a href="{% url 'book_details' book_id=book.id %}"> {{book.title }} </a><p>
+                <p>{% trans "Back to" %} <a href="{% url 'book_details' book_id=book.id %}"> {{book.title }} </a><p>
             </div>
         </main>
     {% include "footer.html" %}

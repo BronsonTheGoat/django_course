@@ -5,12 +5,17 @@ import datetime
 from .forms import BookForm, BookAddForm, AuthorForm
 from .models import Book, Author, Borrow
 
+from django.utils.translation import gettext as _
+from django.utils import translation
+
 # Create your views here.
 
 def index(request):
+    translation.activate("hu")
     return render(request, 'index.html')
 
 def get_books(request):
+    translation.activate("hu")
     books = Book.objects.all()
     form = BookForm(request.GET or None)
     if request.GET and form.is_valid():
@@ -28,6 +33,7 @@ def get_books(request):
     return render(request, 'books.html', context)
 
 def get_book_details(request, book_id):
+    translation.activate("hu")
     try:
         book = Book.objects.get(id=book_id)
     except Book.DoesNotExist:
@@ -40,6 +46,7 @@ def get_book_details(request, book_id):
     return render(request, 'book_details.html', context)
 
 def get_authors(request):
+    translation.activate("hu")
     authors = Author.objects.all()
     form = AuthorForm(request.GET or None)
     if request.GET and form.is_valid():
@@ -59,6 +66,7 @@ def get_authors(request):
     return render(request, 'authors.html', context)
 
 def get_author_details(request, author_id):
+    translation.activate("hu")
     try:
         author = Author.objects.get(id=author_id)
     except Author.DoesNotExist:
@@ -68,6 +76,7 @@ def get_author_details(request, author_id):
 
 @permission_required('book_add', raise_exception=True)
 def add_book(request):
+    translation.activate("hu")
     form = BookAddForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
@@ -77,6 +86,7 @@ def add_book(request):
     return render(request, "book_add.html", context)
 
 def update_book(request, book_id):
+    translation.activate("hu")
     try:
         book = Book.objects.get(id=book_id)
     except Book.DoesNotExist:
@@ -100,6 +110,7 @@ def update_book(request, book_id):
     return render(request, 'book_update.html', context)
 
 def borrow_book(request, book_id):
+    translation.activate("hu")
     if request.user.is_authenticated:
         user = request.user
         print(user)
@@ -121,6 +132,7 @@ def borrow_book(request, book_id):
         return redirect('book_details', book_id=book.id)
     
 def return_book(request, book_id):
+    translation.activate("hu")
     if not request.user.is_authenticated:
         return HttpResponse('Not allowed', status=403)
 
@@ -146,6 +158,7 @@ def return_book(request, book_id):
     return HttpResponse("Invalid request", status=400)
 
 def profile(request):
+    translation.activate("hu")
     if not request.user.is_authenticated:
         return HttpResponse('Not allowed', status=403)
     else:
