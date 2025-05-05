@@ -14,6 +14,8 @@ from .models import Customer, Product, Purchase, PurchaseItem, ShopingCart, Cart
 from django.utils.translation import gettext as _
 from django.utils import translation
 
+from django.conf import settings
+
 # Create your views here.
 
 def index(request):
@@ -101,11 +103,11 @@ def index(request):
 #     return render(request, 'shopping/customers2.html', context)
 
 def page1(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     return HttpResponse(_("Welcome!"))
 
 def page2(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     # return HttpResponse(_("Hi my friend!"))
     # context = {
     #     "title": _("Welcome on the page!"),
@@ -567,3 +569,38 @@ def create_purchase(request):
 #         'purchase': purchase,
 #         'items': items
 #     })
+
+# def set_language_hu(request):
+#     translation.activate('hu')
+#     response = redirect('page2')
+#     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'hu')
+#     return response
+
+# def set_language_en(request):
+#     translation.activate('en')
+#     response = redirect('page2')
+#     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'en')
+#     return response
+
+# def set_language_de(request):
+#     translation.activate('de')
+#     response = redirect('page2')
+#     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, 'de')
+#     return response
+
+# def set_language(request, language_code):
+#     translation.activate(language_code)
+#     response = redirect('page2')
+#     response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+#     return response
+
+def set_language2(request):
+    # print(request.GET)
+    # print(request.POST)
+    # print(request.META)
+    language_code = request.POST.get('language')
+    print('CODE', language_code)
+    translation.activate(language_code)
+    response = redirect(request.META.get('HTTP_REFERER', '/'))
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+    return response

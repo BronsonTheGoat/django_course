@@ -20,42 +20,36 @@ msgstr ""
 
 #: .\shopping\templates\shopping\header.html:16
 msgid "Home"
-msgstr "Kezdőlap"
+msgstr "Startseite"
 
 #: .\shopping\templates\shopping\header.html:17
 msgid "Customers"
-msgstr "Vásárlók"
+msgstr "Kunden"
 
 #: .\shopping\templates\shopping\header.html:18
 msgid "Products"
-msgstr "Termékek"
+msgstr "Produkte"
 
 #: .\shopping\templates\shopping\header.html:38
 msgid "Cart"
-msgstr "Kosár"
+msgstr "Einkaufswagen"
 
 #: .\shopping\templates\shopping\header.html:43
 msgid "Logout"
-msgstr "Kijelentkezés"
+msgstr "Ausloggen"
 
 #: .\shopping\templates\shopping\header.html:48
 msgid "Login"
-msgstr "Bejelentkezés"
+msgstr "Einloggen"
 
 #: .\shopping\templates\shopping\page2.html:14
 msgid "Welcome on the shopping page"
-msgstr "Üdvözöllek a vásárlás oldalon"
+msgstr "Willkommen auf der Einkauffseite"
 
 #: .\shopping\templates\shopping\page2.html:15
 msgid "Customer:"
-msgstr "Vásárló:"
+msgstr "Kunde:"
 
 #: .\shopping\views.py:107
 msgid "Welcome!"
-msgstr "Üdvözöllek!"
-
-#~ msgid "Welcome on the page!"
-#~ msgstr "Üdvözöllek az oldalon!"
-
-#~ msgid "Hi my friend!"
-#~ msgstr "Szia barátom!"
+msgstr "Willkommen!"

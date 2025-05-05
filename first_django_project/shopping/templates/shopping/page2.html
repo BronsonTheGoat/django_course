@@ -13,5 +13,25 @@
         
         <h1>{% trans 'Welcome on the shopping page' %}</h1>
         <p>{% trans "Customer:" %}</p>
+        <form method="post" action="{% url 'set_language2' %}">
+            {% csrf_token %}
+            <select name="language" onchange="this.form.submit()">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ language.name_local }} ({{ language.name }})
+                        {% comment %} {{ language.code }} {% endcomment %}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <form method="post" action="{% url 'view1' %}">
+            {% csrf_token %}
+            <button type="submit"> POST for oop view </button>
+            </select>
+        </form>
     </body>
 </html>

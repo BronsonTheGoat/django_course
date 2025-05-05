@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from . import views_classes
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -21,4 +22,14 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("page1/", views.page1, name="page1"),
     path("page2/", views.page2, name="page2"),
+    # path("set_language_hu/", views.set_language_hu, name="set_language_hu"),
+    # path("set_language_en/", views.set_language_en, name="set_language_en"),
+    # path("set_language_de/", views.set_language_de, name="set_language_de"),
+    # path("set_language/<str:language_code>", views.set_language, name="set_language"),
+    path("set_language/", views.set_language2, name="set_language2"),
+    path("view1", views_classes.MyView.as_view(), name="view1"),
+    path("view2", views_classes.MyTemplateView.as_view(), name="view2"),
+    path("customers2/", views_classes.CustomerListView.as_view(), name="customers2"),
+    path("customers2/<int:pk>", views_classes.CustomerDetailView.as_view(), name="customers2_detail"),
+    path("customers2/add", views_classes.CustomerCreateView.as_view(), name="customers2_add"),
 ]

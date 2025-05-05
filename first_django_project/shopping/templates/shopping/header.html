@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <div class="container">
     <nav>
           <input type="checkbox" id="nav" class="hidden">
@@ -12,22 +13,38 @@
           </div>
           <div class="nav-wrapper">
                 <ul>
-                        <li><a href="{% url 'index' %}" class="menu-button"><i class="fa-solid fa-house"></i> Home</a></li>
-                        <li><a href="{% url 'customer_list' %}" class="menu-button"><i class="fa-solid fa-users"></i> Customers</a></li>
-                        <li><a href="{% url 'product_list' %}" class="menu-button"><i class="fa-solid fa-box"></i> Products</a></li>
+                        <li><a href="{% url 'index' %}" class="menu-button"><i class="fa-solid fa-house"></i> {% trans "Home" %}</a></li>
+                        <li><a href="{% url 'customer_list' %}" class="menu-button"><i class="fa-solid fa-users"></i> {% trans "Customers" %}</a></li>
+                        <li><a href="{% url 'product_list' %}" class="menu-button"><i class="fa-solid fa-box"></i> {% trans "Products" %}</a></li>
+                        <li>
+                              <form method="post" action="{% url 'set_language2' %}">
+                                    {% csrf_token %}
+                                    <select name="language" onchange="this.form.submit()">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                                {{ language.name_local }} ({{ language.name }})
+                                                {% comment %} {{ language.code }} {% endcomment %}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                        </li>
                         {% if user.is_authenticated %}
                               <li>
-                                    <a href="{% url 'cart_details' %}"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+                                    <a href="{% url 'cart_details' %}"><i class="fa-solid fa-cart-shopping"></i> {% trans "Cart" %}</a>
                               </li> 
                               <li>
                               <form action="{% url 'logout' %}" method="post">
                               {% csrf_token %}
-                              <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                              <button type="submit" class="menu-button"><i class="fa-solid fa-right-from-bracket"></i> {% trans "Logout" %}</button>
                               </form>
                               </li>
                         {% else %}
                               <li>
-                              <a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                              <a href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> {% trans "Login" %}</a>
                               </li>
                         {% endif %}
                 </ul>
