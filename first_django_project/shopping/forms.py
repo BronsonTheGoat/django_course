@@ -35,6 +35,11 @@ class CustomerAddForm2(forms.ModelForm):
         fields = '__all__'
         
 class ProductAddForm2(forms.ModelForm):
+    expiry_date = forms.DateField(
+    widget=forms.DateInput(attrs={'type': 'date'}),
+    required=False
+    )
+    
     class Meta:
         model = Product
         fields = '__all__'

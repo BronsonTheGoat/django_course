@@ -36,7 +36,7 @@
                     </tr>
                 {% for product in products %}
                     <tr>
-                        <td><a href="{% url 'product_details' product_id=product.id %}">{{ product.id }}</a></td>
+                        <td><a href="{% url 'product_details' pk=product.id %}">{{ product.id }}</a></td>
                         <td>{{ product.product_name }}</td>
                         <td>{{ product.price }}</td>
                         <td>{{ product.storage_quantity }}</td>
