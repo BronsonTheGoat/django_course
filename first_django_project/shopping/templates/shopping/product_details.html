@@ -36,6 +36,14 @@
                     <td><a href="{% url 'product_update' pk=product.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                     <td><a href="{% url 'product_delete' pk=product.id %}"><i class="fa-solid fa-trash"></i></a></td>
                     {% comment %} <td>
+                        <form method="post" action="{% url 'delete_product' pk=product.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background: none; border: none; padding: 0; cursor:pointer;">
+                                <img class="icon" src="{% static 'images/edit_icon.png' %}" alt="Delete">
+                            </button>
+                        </form>
+                    </td> {% endcomment %}
+                    {% comment %} <td>
                         {% if product.storage_quantity %}
                             {% if user.customer %}                        
                                 <form action="{% url 'product_buy' product.id %}" method="post">

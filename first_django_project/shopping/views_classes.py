@@ -147,7 +147,8 @@ class ProductUpdateView(UpdateView):
     
 class ProductDeleteView(DeleteView):
     model = Product
-    template_name = 'shopping/product_delete_success.html'
+    template_name = 'shopping/product_confirm_delete.html'
+    # template_name = 'shopping/product_delete_success.html'
     success_url = '/shopping/products'
     # context_object_name = 'product2'
     def post(self, request, *args, **kwargs):

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shopping',
     'rangefilter',
     'django_object_actions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
