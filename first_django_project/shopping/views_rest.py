@@ -1,12 +1,15 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import status
+from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Product, Customer
-from .serializers import CustomerDetailSerializer, ProductDetailSerializer, ProductSerializer, ProductCreateSerializer, CustomerSerializer, CustomerCreateSerializer
+from .models import Product, Customer, Purchase
+from .serializers import CustomerDetailSerializer, ProductDetailSerializer, ProductSerializer,\
+    ProductCreateSerializer, CustomerSerializer, CustomerCreateSerializer, PurchaseSerializer,\
+    PurchaseListSerializer
 
 from rest_framework.views import APIView
 from rest_framework import generics
+from rest_framework.permissions import BasePermission
 
 @api_view(['GET', 'POST'])
 def product_list(request):
@@ -163,3 +166,64 @@ class ProductListCreate(generics.ListCreateAPIView):
 class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
+    
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        sort_by = request.query_params.get('sort', 'product_name')
+        queryset = queryset.order_by(sort_by)
+        serializer = ProductSerializer(queryset, many=True)
+        return Response({
+            'count': queryset.count(),
+            'results': serializer.data
+        })
+
+class IsOwner(BasePermission):
+    def has_permission(self, request, view):
+        if request.user.is_superuser:
+            return True
+        if view.action == 'list':
+            return False
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        if request.user.is_superuser:
+            return True
+        return hasattr(request.user, 'customer') and request.user.customer == obj
+    
+class IsCustomer(BasePermission):
+    def has_permission(self, request, view):
+        if request.user.is_superuser:
+            return True
+        if view.action == 'list':
+            return False
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        if request.user.is_superuser:
+            return True
+        # if hasattr(request.user, 'customer'):
+        return hasattr(request.user, 'customer') and request.user.customer == obj.customer
+        
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerDetailSerializer
+    permission_classes = [IsOwner]
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = CustomerSerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+class PurchaseViewSet(viewsets.ModelViewSet):
+    queryset = Purchase.objects.all()
+    serializer_class = PurchaseSerializer
+    permission_classes = [IsCustomer]
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = PurchaseListSerializer(queryset, many=True)
+        return Response(serializer.data)
