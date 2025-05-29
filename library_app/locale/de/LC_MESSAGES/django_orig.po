@@ -20,191 +20,191 @@ msgstr ""
 #: .\library_application\templates\author_details.html:13
 #: .\library_application\templates\authors.html:22
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:16
 #: .\library_application\templates\authors.html:23
 msgid "Birth date"
-msgstr "Geburtsdatum"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:19
 #: .\library_application\templates\authors.html:24
 msgid "Birth place"
-msgstr "Geburtsort"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:22
 #: .\library_application\templates\authors.html:25
 msgid "Nationality"
-msgstr "Nationalität"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:26
 #: .\library_application\templates\authors.html:26
 msgid "Decease date"
-msgstr "Todesdatum"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:31
 #: .\library_application\templates\authors.html:27
 msgid "Decease place"
-msgstr "verstorbener Ort"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:36
 #: .\library_application\templates\book_delete_success.html:13
 #: .\library_application\templates\books.html:10
 #: .\library_application\templates\header.html:34
 msgid "Books"
-msgstr "Bücher"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:41
 #: .\library_application\templates\book_details.html:18
 #: .\library_application\templates\books.html:69
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:42
 msgid "Publised year"
-msgstr "Erxcheinungsjahr"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:43
 #: .\library_application\templates\book_details.html:36
 #: .\library_application\templates\books.html:72
 msgid "Pages"
-msgstr "Seiten"
+msgstr ""
 
 #: .\library_application\templates\authors.html:8
 #: .\library_application\templates\header.html:37
 msgid "Authors"
-msgstr "Autoren"
+msgstr ""
 
 #: .\library_application\templates\authors.html:55
 msgid "No authors"
-msgstr "Keine Autoren"
+msgstr ""
 
 #: .\library_application\templates\book_add.html:9
 msgid "New book"
-msgstr "Neues Buch"
+msgstr ""
 
 #: .\library_application\templates\book_delete_failed.html:6
 msgid "Delete - fail"
-msgstr "Löschen - Fehlgeschlagen"
+msgstr ""
 
 #: .\library_application\templates\book_delete_failed.html:11
 msgid "This book cannot be deleted"
-msgstr "Dieses buch kann nicht gelöscht werden"
+msgstr ""
 
 #: .\library_application\templates\book_delete_failed.html:13
 #: .\library_application\templates\book_delete_success.html:13
 msgid "Back to"
-msgstr "Zurüch zu"
+msgstr ""
 
 #: .\library_application\templates\book_delete_success.html:6
 msgid "Delete - success"
-msgstr "Löschen - erfolgreich"
+msgstr ""
 
 #: .\library_application\templates\book_delete_success.html:11
 msgid "This book was successfully deleted"
-msgstr "Diese buch wurde erfolgrerich gelöscht"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:21
 #: .\library_application\templates\books.html:49
 #: .\library_application\templates\books.html:70
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:33
 #: .\library_application\templates\books.html:71
 msgid "Published"
-msgstr "Erscheinungsjahr"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:39
 msgid "Cover image"
-msgstr "Titelbild"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:46
 msgid "No image available"
-msgstr "Kein bild verfügbar"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:52
 #: .\library_application\templates\books.html:74
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:55
 msgid "Borrow"
-msgstr "Ausleihen"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:57
 msgid "Return"
-msgstr "Zurückgeben"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:60
 #: .\library_application\templates\books.html:75
 msgid "Delete"
-msgstr "Löschen"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:100
 msgid "Borrow history"
-msgstr "Ausleihhistorie"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:109
 msgid "still borrowed"
-msgstr "Noch geliehen"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:113
 msgid "There's no history available"
-msgstr "Kein verlauf verfügbar"
+msgstr ""
 
 #: .\library_application\templates\book_update.html:9
 msgid "Update book"
-msgstr "Buch atualisieren"
+msgstr ""
 
 #: .\library_application\templates\book_update.html:17
 msgid "Back to details"
-msgstr "Zurück zu details"
+msgstr ""
 
 #: .\library_application\templates\books.html:20
 msgid "Add book"
-msgstr "Buch hinzufügen"
+msgstr ""
 
 #: .\library_application\templates\books.html:28
 msgid "Table"
-msgstr "Tabelle"
+msgstr ""
 
 #: .\library_application\templates\books.html:29
 msgid "Cards"
-msgstr "Karten"
+msgstr ""
 
 #: .\library_application\templates\books.html:60
 msgid "Details"
-msgstr "Details"
+msgstr ""
 
 #: .\library_application\templates\books.html:101
 msgid "No books"
-msgstr "Keine bücher"
+msgstr ""
 
 #: .\library_application\templates\footer.html:3
 msgid "Library App"
-msgstr "Bibliotheks-app"
+msgstr ""
 
 #: .\library_application\templates\footer.html:3
 msgid "Zoltán Sebestyén"
-msgstr "Zoltán Sebestyén"
+msgstr ""
 
 #: .\library_application\templates\header.html:9
 #: .\library_application\templates\header.html:31
 msgid "Home"
-msgstr "Startseite"
+msgstr ""
 
 #: .\library_application\templates\header.html:58
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 #: .\library_application\templates\header.html:62
 msgid "Logout"
-msgstr "Abmelden"
+msgstr ""
 
 #: .\library_application\templates\index.html:9
 msgid "Welcome to the library"
-msgstr "Willkommen in der Bibliothek"
+msgstr ""
 
 #: .\library_application\templates\index.html:16
 msgid "Welcome to the library app"
@@ -212,51 +212,51 @@ msgstr ""
 
 #: .\library_application\templates\index.html:17
 msgid "Do you have an account"
-msgstr "Willkommen in der Bibliothek-app"
+msgstr ""
 
 #: .\library_application\templates\index.html:17
 #: .\library_application\templates\registration\login.html:6
 #: .\library_application\templates\registration\login.html:9
 #: .\library_application\templates\registration\login.html:13
 msgid "Login"
-msgstr "Anmelden"
+msgstr ""
 
 #: .\library_application\templates\profile.html:9
 msgid "My profile"
-msgstr "Mein profil"
+msgstr ""
 
 #: .\library_application\templates\profile.html:11
 msgid "First name"
-msgstr "Vorname"
+msgstr ""
 
 #: .\library_application\templates\profile.html:12
 msgid "Last name"
-msgstr "Nachname"
+msgstr ""
 
 #: .\library_application\templates\profile.html:13
 msgid "Username"
-msgstr "Benutzername"
+msgstr ""
 
 #: .\library_application\templates\profile.html:14
 msgid "Email"
-msgstr "E-mail"
+msgstr ""
 
 #: .\library_application\templates\profile.html:16
 msgid "Borrows"
-msgstr "liehen"
+msgstr ""
 
 #: .\library_application\templates\profile.html:24
 msgid "No borrowed books"
-msgstr "Keine ausgeliehenen Bücher"
+msgstr ""
 
 #: .\library_application\templates\registration\forbidden.html:6
 msgid "Forbidden page"
-msgstr "Verbotene seite"
+msgstr ""
 
 #: .\library_application\templates\registration\forbidden.html:9
 msgid "You are not allowed to view this page"
-msgstr "SIa sind nicht berechtig diese seite anzuzeigen"
+msgstr ""
 
 #: .\library_application\templates\registration\forbidden.html:10
 msgid "Back to home"
-msgstr "Zurück zu Startseite"
+msgstr ""

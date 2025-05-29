@@ -42,9 +42,11 @@
                             <select name="language" onchange="this.form.submit()">
                                 {% get_current_language as LANGUAGE_CODE %}
                                 {% get_available_languages as LANGUAGES %}
-                                {% for lang in LANGUAGES %}
-                                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                                        {{ lang.1 }}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                        {% comment %} {{ language.name_local }} ({{ language.name }}) {% endcomment %}
+                                        {{ language.code }}
                                     </option>
                                 {% endfor %}
                             </select>

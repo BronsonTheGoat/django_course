@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render, loader, redirect
 from django.contrib.auth.decorators import permission_required
@@ -13,11 +14,11 @@ from django.utils import translation
 # Create your views here.
 
 def index(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     return render(request, 'index.html')
 
 def get_books(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     books = Book.objects.all()
     form = BookForm(request.GET or None)
     if request.GET and form.is_valid():
@@ -36,7 +37,7 @@ def get_books(request):
 
 @login_required
 def get_book_details(request, book_id):
-    translation.activate("hu")
+    # translation.activate("hu")
     try:
         book = Book.objects.get(id=book_id)
     except Book.DoesNotExist:
@@ -49,7 +50,7 @@ def get_book_details(request, book_id):
     return render(request, 'book_details.html', context)
 
 def get_authors(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     authors = Author.objects.all()
     form = AuthorForm(request.GET or None)
     if request.GET and form.is_valid():
@@ -69,7 +70,7 @@ def get_authors(request):
     return render(request, 'authors.html', context)
 
 def get_author_details(request, author_id):
-    translation.activate("hu")
+    # translation.activate("hu")
     try:
         author = Author.objects.get(id=author_id)
     except Author.DoesNotExist:
@@ -82,7 +83,7 @@ def is_librarian(user):
 
 @user_passes_test(is_librarian)
 def add_book(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     form = BookAddForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
@@ -93,7 +94,7 @@ def add_book(request):
 
 @user_passes_test(is_librarian)
 def update_book(request, book_id):
-    translation.activate("hu")
+    # translation.activate("hu")
     try:
         book = Book.objects.get(id=book_id)
     except Book.DoesNotExist:
@@ -124,7 +125,7 @@ def delete_book(request, book_id):
         return HttpResponse('Book not found', status=404)
 
 def borrow_book(request, book_id):
-    translation.activate("hu")
+    # translation.activate("hu")
     if request.user.is_authenticated:
         user = request.user
         print(user)
@@ -146,7 +147,7 @@ def borrow_book(request, book_id):
         return redirect('book_details', book_id=book.id)
     
 def return_book(request, book_id):
-    translation.activate("hu")
+    # translation.activate("hu")
     if not request.user.is_authenticated:
         return HttpResponse('Not allowed', status=403)
 
@@ -172,7 +173,7 @@ def return_book(request, book_id):
     return HttpResponse("Invalid request", status=400)
 
 def profile(request):
-    translation.activate("hu")
+    # translation.activate("hu")
     if not request.user.is_authenticated:
         return HttpResponse('Not allowed', status=403)
     else:
@@ -184,3 +185,14 @@ def profile(request):
         "borrow": borrow
     }
     return render(request, 'profile.html', context)
+
+def set_language(request):
+    # print(request.GET)
+    print(request.POST)
+    # print(request.META)
+    language_code = request.POST.get('language')
+    print('CODE', language_code)
+    translation.activate(language_code)
+    response = redirect(request.META.get('HTTP_REFERER', '/'))
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+    return response
