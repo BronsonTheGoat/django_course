@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, loader, redirect
 from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required
 import datetime
 from .forms import BookForm, BookAddForm, AuthorForm
 from .models import Book, Author, Borrow
@@ -32,6 +33,7 @@ def get_books(request):
     }
     return render(request, 'books.html', context)
 
+@login_required
 def get_book_details(request, book_id):
     translation.activate("hu")
     try:

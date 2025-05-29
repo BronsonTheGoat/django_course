@@ -153,7 +153,7 @@ main{
       padding: 25px;
       border-radius: 15px;
       background-color: rgba(255,255,255,0.4);
-      width: 50%;
+      width: 70%;
       text-align: center;
 }
 
@@ -187,6 +187,45 @@ main .index-img{
 
 .books tr td:nth-child(2){
       text-align: right;
+}
+
+.card-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin: auto;
+      gap: 1rem;
+      justify-content: center;
+}
+
+.book-card {
+      border: 1px solid #ac53ff;
+      border-radius: 10px;
+      padding: 1rem;
+      width: 250px;
+      background-color: #f9f9f9;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.book-card h4 {
+      margin-top: 0;
+      color: #333;
+}
+
+.cover-image{
+      width: 200px;
+      height: 350px;
+      margin: auto;
+}
+
+.book-card img {
+    width: 100%;
+    border-radius: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card a:hover img {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 #preview{
