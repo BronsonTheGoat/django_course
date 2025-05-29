@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 20:49+0200\n"
+"POT-Creation-Date: 2025-05-29 20:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,251 +17,246 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 #: .\library_application\templates\author_details.html:13
 #: .\library_application\templates\authors.html:22
 msgid "Name"
-msgstr "Név"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:16
 #: .\library_application\templates\authors.html:23
 msgid "Birth date"
-msgstr "Születési dátum"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:19
 #: .\library_application\templates\authors.html:24
 msgid "Birth place"
-msgstr "Születési hely"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:22
 #: .\library_application\templates\authors.html:25
 msgid "Nationality"
-msgstr "Nemzetiség"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:26
 #: .\library_application\templates\authors.html:26
 msgid "Decease date"
-msgstr "Elhalálozás dátuma"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:31
 #: .\library_application\templates\authors.html:27
 msgid "Decease place"
-msgstr "Elhalálozás helye"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:36
 #: .\library_application\templates\book_delete_success.html:13
 #: .\library_application\templates\books.html:10
 #: .\library_application\templates\header.html:34
 msgid "Books"
-msgstr "Könyvek"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:41
 #: .\library_application\templates\book_details.html:18
 #: .\library_application\templates\books.html:69
 msgid "Title"
-msgstr "Cím"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:42
 msgid "Publised year"
-msgstr "Publikálás éve"
+msgstr ""
 
 #: .\library_application\templates\author_details.html:43
 #: .\library_application\templates\book_details.html:36
 #: .\library_application\templates\books.html:72
 msgid "Pages"
-msgstr "Oldalak"
+msgstr ""
 
 #: .\library_application\templates\authors.html:8
 #: .\library_application\templates\header.html:37
 msgid "Authors"
-msgstr "Szerzők"
+msgstr ""
 
 #: .\library_application\templates\authors.html:55
 msgid "No authors"
-msgstr "Nincsenek szerzők"
+msgstr ""
 
 #: .\library_application\templates\book_add.html:9
 msgid "New book"
-msgstr "Új könyv"
+msgstr ""
 
 #: .\library_application\templates\book_delete_failed.html:6
 msgid "Delete - fail"
-msgstr "Törlés - sikertelen"
+msgstr ""
 
 #: .\library_application\templates\book_delete_failed.html:11
 msgid "This book cannot be deleted"
-msgstr "A könyv nem törölhető"
+msgstr ""
 
 #: .\library_application\templates\book_delete_failed.html:13
 #: .\library_application\templates\book_delete_success.html:13
 msgid "Back to"
-msgstr "Vissza a "
+msgstr ""
 
 #: .\library_application\templates\book_delete_success.html:6
 msgid "Delete - success"
-msgstr "Törlés - sikeres"
+msgstr ""
 
 #: .\library_application\templates\book_delete_success.html:11
 msgid "This book was successfully deleted"
-msgstr "A könyv sikeresen törölve"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:21
 #: .\library_application\templates\books.html:49
 #: .\library_application\templates\books.html:70
 msgid "Author"
-msgstr "Szerző"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:33
 #: .\library_application\templates\books.html:71
 msgid "Published"
-msgstr "Publikálva"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:39
 msgid "Cover image"
-msgstr "Borító"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:46
 msgid "No image available"
-msgstr "Nincs elérhető kép"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:52
 #: .\library_application\templates\books.html:74
 msgid "Edit"
-msgstr "Szerkesztés"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:55
 msgid "Borrow"
-msgstr "Kölcsönzés"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:57
 msgid "Return"
-msgstr "Visszavitel"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:60
 #: .\library_application\templates\books.html:75
 msgid "Delete"
-msgstr "Törlés"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:100
 msgid "Borrow history"
-msgstr "Kölcsönzési előzmények"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:109
 msgid "still borrowed"
-msgstr "kikölcsönözve"
+msgstr ""
 
 #: .\library_application\templates\book_details.html:113
 msgid "There's no history available"
-msgstr "Nincs elérhető kölcsönzési előzmény"
+msgstr ""
 
 #: .\library_application\templates\book_update.html:9
 msgid "Update book"
-msgstr "Könyv frissítése"
+msgstr ""
 
 #: .\library_application\templates\book_update.html:17
 msgid "Back to details"
-msgstr "VIssza az adatlaphoz"
+msgstr ""
 
 #: .\library_application\templates\books.html:20
 msgid "Add book"
-msgstr "Könyv hozzáadása"
+msgstr ""
 
 #: .\library_application\templates\books.html:28
 msgid "Table"
-msgstr "Táblázat"
+msgstr ""
 
 #: .\library_application\templates\books.html:29
 msgid "Cards"
-msgstr "Kártyák"
+msgstr ""
 
 #: .\library_application\templates\books.html:60
 msgid "Details"
-msgstr "Részletek"
+msgstr ""
 
 #: .\library_application\templates\books.html:101
 msgid "No books"
-msgstr "Nincsenek könyvek"
+msgstr ""
 
 #: .\library_application\templates\footer.html:3
 msgid "Library App"
-msgstr "Könyvtár alklamazás"
+msgstr ""
 
 #: .\library_application\templates\footer.html:3
 msgid "Zoltán Sebestyén"
-msgstr "Sebestyén Zoltán"
+msgstr ""
 
 #: .\library_application\templates\header.html:9
 #: .\library_application\templates\header.html:31
 msgid "Home"
-msgstr "Kezdőlap"
+msgstr ""
 
 #: .\library_application\templates\header.html:58
 msgid "Profile"
-msgstr "Profil"
+msgstr ""
 
 #: .\library_application\templates\header.html:62
 msgid "Logout"
-msgstr "Kijelentkezés"
+msgstr ""
 
 #: .\library_application\templates\index.html:9
 msgid "Welcome to the library"
-msgstr "Üdvözöllek a könyvtárban"
+msgstr ""
 
 #: .\library_application\templates\index.html:16
 msgid "Welcome to the library app"
-msgstr "Üdvözöllek a könyvtár alkalmazásban"
+msgstr ""
 
 #: .\library_application\templates\index.html:17
 msgid "Do you have an account"
-msgstr "Van már fiókod"
+msgstr ""
 
 #: .\library_application\templates\index.html:17
 #: .\library_application\templates\registration\login.html:6
 #: .\library_application\templates\registration\login.html:9
 #: .\library_application\templates\registration\login.html:13
 msgid "Login"
-msgstr "Bejelentkezés"
+msgstr ""
 
 #: .\library_application\templates\profile.html:9
-#, fuzzy
-#| msgid "Profile"
 msgid "My profile"
-msgstr "Profil"
+msgstr ""
 
 #: .\library_application\templates\profile.html:11
 msgid "First name"
-msgstr "Keresztnév"
+msgstr ""
 
 #: .\library_application\templates\profile.html:12
 msgid "Last name"
-msgstr "Vezetéknév"
+msgstr ""
 
 #: .\library_application\templates\profile.html:13
 msgid "Username"
-msgstr "Felhasználó név"
+msgstr ""
 
 #: .\library_application\templates\profile.html:14
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: .\library_application\templates\profile.html:16
 msgid "Borrows"
-msgstr "Kölcsönzések"
+msgstr ""
 
 #: .\library_application\templates\profile.html:24
-#, fuzzy
-#| msgid "No books"
 msgid "No borrowed books"
-msgstr "Nincsenek könyvek"
+msgstr ""
 
 #: .\library_application\templates\registration\forbidden.html:6
 msgid "Forbidden page"
-msgstr "Tiltott oldal"
+msgstr ""
 
 #: .\library_application\templates\registration\forbidden.html:9
 msgid "You are not allowed to view this page"
-msgstr "Nincs jogosultságod ezt az oldalt megtekinteni"
+msgstr ""
 
 #: .\library_application\templates\registration\forbidden.html:10
 msgid "Back to home"
-msgstr "Vissza a kezdőlapra"
+msgstr ""

@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+{% load permissions %}
+
 
 {% include "header.html" %}
 
@@ -46,18 +48,24 @@
                         </td>
                     </tr>
                     <tr>
+                        {% if user|is_librarian %}
                         <td>{% trans "Edit" %}</td>
+                        {% endif %}
                         {% if book.available %}
                         <td>{% trans "Borrow" %}</td>
                         {% else %}
                         <td>{% trans "Return" %}</td>
                         {% endif %}
+                        {% if user|is_librarian %}
                         <td>{% trans "Delete" %}</td>
+                        {% endif %}
                     </tr>
                     <tr>
+                        {% if user|is_librarian %}
                         <td>
                             <a href="{% url 'book_update' book_id=book.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
+                        {% endif %}
                         <td>
                             <a href="">
                                 {% if book.available %}
@@ -80,9 +88,11 @@
                               {% endif %}
                             </a>
                         </td>
+                        {% if user|is_librarian %}
                         <td>
                             <a href=""><i class="fa-solid fa-trash"></i></a>
                         </td>
+                        {% endif %}
                     </tr>
                     {% if request.user.is_staff %}
                         <tr>

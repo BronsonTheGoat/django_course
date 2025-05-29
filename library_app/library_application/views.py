@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, loader, redirect
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 import datetime
 from .forms import BookForm, BookAddForm, AuthorForm
 from .models import Book, Author, Borrow
@@ -76,7 +77,10 @@ def get_author_details(request, author_id):
     context = {'author': author}
     return render(request, 'author_details.html', context)
 
-@permission_required('book_add', raise_exception=True)
+def is_librarian(user):
+    return user.groups.filter(name='Librarians').exists()
+
+@user_passes_test(is_librarian)
 def add_book(request):
     translation.activate("hu")
     form = BookAddForm(request.POST, request.FILES)
@@ -87,6 +91,7 @@ def add_book(request):
     context = {"form":BookAddForm()}
     return render(request, "book_add.html", context)
 
+@user_passes_test(is_librarian)
 def update_book(request, book_id):
     translation.activate("hu")
     try:
@@ -110,6 +115,13 @@ def update_book(request, book_id):
         'book': book
     }
     return render(request, 'book_update.html', context)
+
+@user_passes_test(is_librarian)
+def delete_book(request, book_id):
+    try:
+        product = Book.objects.get(id=book_id)
+    except Book.DoesNotExist:
+        return HttpResponse('Book not found', status=404)
 
 def borrow_book(request, book_id):
     translation.activate("hu")

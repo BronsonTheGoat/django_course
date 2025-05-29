@@ -36,6 +36,21 @@
                         <li class="{% if request.path == '/library_application/authors' %}active{% endif %}">
                             <a href="{% url 'author_list' %}"><i class="fa-solid fa-feather"></i> {% trans "Authors" %}</a>
                         </li>
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <select name="language" onchange="this.form.submit()">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% for lang in LANGUAGES %}
+                                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                                        {{ lang.1 }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            </form>
+                        </li>
+
                         {% if user.is_authenticated %}
                             <ul>
                             <div class="dropdown">

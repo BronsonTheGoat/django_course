@@ -1,5 +1,7 @@
 {% load static %}
 {% load i18n %}
+{% load permissions %}
+
 
 {% include "header.html" %}
 
@@ -14,7 +16,9 @@
                 </form>
                 {% if user.is_authenticated %}
                 <div>
-                    <a href="{% url 'book_add' %}"><button>{% trans "Add book" %}</button></a>
+                    {% if user|is_librarian %}
+                        <a href="{% url 'book_add' %}"><button>{% trans "Add book" %}</button></a>
+                    {% endif %}    
                 </div>
                 {% endif %}
                 <br>
@@ -63,8 +67,10 @@
                                 <th>{% trans "Author" %}</th>
                                 <th>{% trans "Published" %}</th>
                                 <th>{% trans "Pages" %}</th>
+                                {% if user|is_librarian %}
                                 <th>{% trans "Edit" %}</th>
                                 <th>{% trans "Delete" %}</th>
+                                {% endif %}
                             </tr>
                             {% for book in books %}
                                 <tr>
@@ -80,8 +86,10 @@
                                     </td>
                                     <td>{{ book.published_year }}</td>
                                     <td>{{ book.pages }}</td>
+                                    {% if user|is_librarian %}
                                     <td><a href="{% url 'book_update' book_id=book.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                     <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </table>
